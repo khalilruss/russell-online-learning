@@ -39,11 +39,16 @@ const displayAccordions = (): JSX.Element[] => {
 
   return accordionAccomplisments.map((accordion, index) => {
     return (
-      <Accordion disableGutters={true} className="shadow-none bg-light-grey">
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+      <Accordion disableGutters={true} className="shadow-none">
+        <AccordionSummary
+          className="bg-regal-blue text-white"
+          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+        >
           {accordion.summary}
         </AccordionSummary>
-        <AccordionDetails>{accordion.details}</AccordionDetails>
+        <AccordionDetails className="bg-light-grey">
+          {accordion.details}
+        </AccordionDetails>
       </Accordion>
     );
   });
@@ -119,7 +124,7 @@ const sectionContent = [
           <br />
           Exceptional progress made by my Year 4 class
         </p>
-        <p>
+        <p className="mb-2">
           <b>September 2016 – July 2019</b>
         </p>
         {displayAccordions()}

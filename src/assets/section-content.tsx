@@ -1,4 +1,53 @@
 import Carousel from "react-material-ui-carousel";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+const displayAccordions = (): JSX.Element[] => {
+  const accordionAccomplisments = [
+    {
+      summary:
+        "PSHE (Personal, Social, Health and Economic education) Co-ordinator",
+      details: `The profile of PSHE was elevated for all pupils through my creation of a PSHE curriculum. 
+      The intention was to allow pupils to gain therequired knowledge, 
+      skills and understanding to be able to lead confident, healthy and independent lives.`,
+    },
+    {
+      summary: "RRSA (Rights Respecting School Awards) Lead",
+      details: `I initiated the process of allowing the school to become a ’Rights
+      Respecting School’ and encouraged the school community to place the
+      UN Convention on the Rights of the Child at the heart of the
+      school’s ethos and curriculum.`,
+    },
+    {
+      summary: "Reading Co-ordinator",
+      details: `As a result of implementing new initiatives, I was able to raise the
+      profile of reading in the school. Monthly ‘early morning reading
+      sessions’ for parents/ carers were organised as well as visits to
+      the local library and Book Fairs.`,
+    },
+    {
+      summary: "School-Based/ NQT (New Qualified Teacher) Mentor",
+      details: `My role was to promote the growth and development of the student
+      teachers that I mentored. Through modelling and frequent
+      conversations, I was able to pass on invaluable knowledge helping
+      the students to not only develop their educational voice but to
+      consolidate their own effective and efficient teaching style.`,
+    },
+  ];
+
+  return accordionAccomplisments.map((accordion, index) => {
+    return (
+      <Accordion disableGutters={true} className="shadow-none bg-light-grey">
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          {accordion.summary}
+        </AccordionSummary>
+        <AccordionDetails>{accordion.details}</AccordionDetails>
+      </Accordion>
+    );
+  });
+};
 
 const sectionContent = [
   {
@@ -60,42 +109,21 @@ const sectionContent = [
     content: (
       <div>
         <p>
-          <b>​November 2019</b> - Personal recognition in ‘Good’ Religious
-          Education Ofsted report (Section 48 report)
+          <b>​November 2019</b>
+          <br />
+          Personal recognition in ‘Good’ Religious Education Ofsted report
+          (Section 48 report)
         </p>
-        <p>
-          <b>September 2018 /July 2019</b> - Exceptional progress made by my
-          Year 4 class
+        <p className="mb-3">
+          <b>September 2018 /July 2019</b>
+          <br />
+          Exceptional progress made by my Year 4 class
         </p>
         <p>
           <b>September 2016 – July 2019</b>
-          <br />
-          PSHE (Personal, Social, Health and Economic education) Co-ordinator –
-          The profile of PSHE was elevated for all pupils through my creation of
-          a PSHE curriculum. The intention was to allow pupils to gain the
-          required knowledge, skills and understanding to be able to lead
-          confident, healthy and independent lives.
         </p>
-        <p>
-          RRSA (Rights Respecting School Awards) Lead – I initiated the process
-          of allowing the school to become a ’Rights Respecting School’ and
-          encouraged the school community to place the UN Convention on the
-          Rights of the Child at the heart of the school’s ethos and curriculum.
-        </p>
-        <p>
-          Reading Co-ordinator –As a result of implementing new initiatives, I
-          was able to raise the profile of reading in the school. Monthly ‘early
-          morning reading sessions’ for parents/ carers were organised as well
-          as visits to the local library and Book Fairs.
-        </p>
-        <p>
-          School-Based/ NQT (New Qualified Teacher) Mentor – My role was to
-          promote the growth and development of the student teachers that I
-          mentored. Through modelling and frequent conversations, I was able to
-          pass on invaluable knowledge helping the students to not only develop
-          their educational voice but to consolidate their own effective and
-          efficient teaching style.
-        </p>
+        {displayAccordions()}
+        <br />
         <p>
           During my teaching career I have also had direct responsibility of
           overseeing year groups. I have acquired the status of being Head of

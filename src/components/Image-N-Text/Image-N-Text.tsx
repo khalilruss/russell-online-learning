@@ -3,7 +3,7 @@ import "./Image-N-Text.css";
 
 const ImageNText = (): JSX.Element => {
   return (
-    <div style={{ position: "relative" }}>
+    <div className="relative">
       <img className="image" src={childrenImg}></img>
       <div className="text-over-image">
         <h1 className="title">Welcome to Russell Online Learning</h1>

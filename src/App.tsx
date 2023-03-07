@@ -29,7 +29,7 @@ const App = (): JSX.Element => {
   return (
     <div className="App">
       <header className="header">
-        <h1 style={{ color: "white" }}>Russell Online Learning</h1>
+        <h1 className="text-white">Russell Online Learning</h1>
       </header>
       <ImageNText />
       {displayContent()}

@@ -16,7 +16,7 @@ const PageSection = ({
   children,
 }: PageSectionProps): JSX.Element => {
   return (
-    <div className={`page-section ${colouredBg ? "section-coloured-bg" : ""}`}>
+    <div className={`page-section ${colouredBg ? "bg-light-grey" : ""}`}>
       <h2 className="section-title">{title}</h2>
       <div className="section-content">{children}</div>
     </div>

@@ -42,7 +42,7 @@ const sectionContent = [
           training and vetting process was undertaken. I also currently hold an
           enhanced DBS check.
         </p>
-        <ul style={{ listStylePosition: "inside" }}>
+        <ul className="list-disc list-inside">
           I am currently registered with three Education Recruitment Agencies:
           <li>Teaching Personnel</li>
           <li>Smart Teachers</li>
@@ -116,10 +116,12 @@ const sectionContent = [
             To nurture a strong student/teacher relationship highlighting the
             importance of mutual respect
           </p>
+          <br />
           <p>
             To create an environment where a shared enthusiasm for learning
             takes place.
           </p>
+          <br />
           <p>
             To teach to maximise every child’s full potential so that they can
             become the best versions of themselves.
@@ -136,7 +138,8 @@ const sectionContent = [
           To inspire pupils to thrive in their environment is integral to my
           teaching and is reflected in the testimonies below:
         </p>
-        <Carousel height={"200px"}>
+        <br />
+        <Carousel>
           <div>
             <h3>
               <b>Head teacher of Hopton Primary School</b>
@@ -225,17 +228,10 @@ const sectionContent = [
     title: "Sessions and Prices",
     content: (
       <div>
-        {" "}
         <p>Avaliable Sessions</p>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-          }}
-        >
+        <div className="flex flex-row justify-evenly">
           <div>
-            <p style={{ color: "#3a54fb" }}>
+            <p className="text-regal-blue">
               <b>£25p/h</b>
             </p>
             <p>
@@ -246,7 +242,7 @@ const sectionContent = [
             </p>
           </div>
           <div>
-            <p style={{ color: "#3a54fb" }}>
+            <p className="text-regal-blue">
               <b>£30p/h</b>
             </p>
             <p>

@@ -56,6 +56,7 @@ const displayAccordions = (): JSX.Element[] => {
 
 const sectionContent = [
   {
+    id: "aboutROL",
     title: "About Russell Online Learning",
     content: (
       <div>
@@ -76,6 +77,7 @@ const sectionContent = [
     ),
   },
   {
+    id: "aboutMe",
     title: "About Me",
     content: (
       <div>
@@ -110,6 +112,7 @@ const sectionContent = [
     ),
   },
   {
+    id: "accomplishments",
     title: "My Accomplishments",
     content: (
       <div>
@@ -119,6 +122,7 @@ const sectionContent = [
           Personal recognition in ‘Good’ Religious Education Ofsted report
           (Section 48 report)
         </p>
+
         <p className="mb-3">
           <b>September 2018 /July 2019</b>
           <br />
@@ -141,6 +145,7 @@ const sectionContent = [
     ),
   },
   {
+    id: "ethos",
     title: "My Ethos",
     content: (
       <div>
@@ -164,6 +169,7 @@ const sectionContent = [
     ),
   },
   {
+    id: "testimonials",
     title: "Testimonials",
     content: (
       <div>
@@ -258,6 +264,7 @@ const sectionContent = [
     ),
   },
   {
+    id: "sessionsAndPrices",
     title: "Sessions and Prices",
     content: (
       <div>

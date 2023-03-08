@@ -2,6 +2,7 @@ import "./App.css";
 import ImageNText from "./components/Image-N-Text/Image-N-Text";
 import PageSection from "./components/Page-Section/Page-Section";
 import content from "./assets/section-content";
+import Header from "./components/Header/Header";
 
 {
   /* "#e7edfa" */
@@ -16,6 +17,7 @@ const App = (): JSX.Element => {
       return (
         <PageSection
           key={index}
+          id={section.id}
           title={section.title}
           colouredBg={index % 2 === 0 ? false : true}
         >
@@ -27,9 +29,7 @@ const App = (): JSX.Element => {
 
   return (
     <div className="App">
-      <header className="header">
-        <h1 className="text-white">Russell Online Learning</h1>
-      </header>
+      <Header />
       <ImageNText />
       {displayContent()}
     </div>

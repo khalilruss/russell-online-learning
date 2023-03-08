@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -8,9 +8,34 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-scroll";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
+
+declare module "@mui/material/styles" {
+  interface BreakpointOverrides {
+    xs: false; // removes the `xs` breakpoint
+    sm: false;
+    md: false;
+    lg: false;
+    xl: false;
+  }
+}
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1425,
+    },
+  },
+});
 
 const Header = (): JSX.Element => {
-  const headersData = [
+  const headerButtons = [
     {
       label: "About",
       id: "about",
@@ -37,33 +62,34 @@ const Header = (): JSX.Element => {
     },
   ];
 
-  const [anchorElAbout, setAnchorElAbout] = React.useState<null | HTMLElement>(
-    null
-  );
-  const handleClickAbout = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElAbout(event.currentTarget);
+  const [anchorElAboutMenu, setAnchorElAboutMenu] =
+    useState<null | HTMLElement>(null);
+
+  const handleClickAboutMenu = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElAboutMenu(event.currentTarget);
   };
-  const handleCloseAbout = () => {
-    setAnchorElAbout(null);
+
+  const handleCloseAboutMenu = () => {
+    setAnchorElAboutMenu(null);
   };
 
   const displayAboutMenu = () => {
     return (
       <Menu
         id="about-menu"
-        anchorEl={anchorElAbout}
-        open={Boolean(anchorElAbout)}
-        onClose={handleCloseAbout}
-        MenuListProps={{ onMouseLeave: handleCloseAbout }}
+        anchorEl={anchorElAboutMenu}
+        open={Boolean(anchorElAboutMenu)}
+        onClose={handleCloseAboutMenu}
+        MenuListProps={{ onMouseLeave: handleCloseAboutMenu }}
       >
         <MenuItem>
           <Link
-            className="text-lg font-medium w-full"
+            className="text-lg font-medium"
             activeClass="active"
             to="aboutROL"
             smooth={true}
             offset={-40}
-            onClick={handleCloseAbout}
+            onClick={handleCloseAboutMenu}
           >
             About Russell Online Learning
           </Link>
@@ -71,13 +97,13 @@ const Header = (): JSX.Element => {
 
         <MenuItem>
           <Link
-            className="text-lg font-medium w-full"
+            className="text-lg font-medium"
             activeClass="active"
             type="submit"
             to="aboutMe"
             smooth={true}
             offset={-40}
-            onClick={handleCloseAbout}
+            onClick={handleCloseAboutMenu}
           >
             About Me
           </Link>
@@ -86,16 +112,14 @@ const Header = (): JSX.Element => {
     );
   };
 
-  const propagateClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const propagateClick = (event: MouseEvent<HTMLElement>) => {
     (
       (event.target as HTMLButtonElement).children[0] as HTMLLinkElement
     ).click();
   };
 
   const displayMenu = (): JSX.Element[] => {
-    return headersData.map((item, index) => {
+    return headerButtons.map((item, index) => {
       return (
         <div>
           <Button
@@ -103,12 +127,12 @@ const Header = (): JSX.Element => {
             endIcon={item.id === "about" ? <KeyboardArrowDownIcon /> : null}
             onClick={
               item.id === "about"
-                ? (event) => handleClickAbout(event)
+                ? (event) => handleClickAboutMenu(event)
                 : (event) => propagateClick(event)
             }
             onMouseEnter={
               item.id === "about"
-                ? (event) => handleClickAbout(event)
+                ? (event) => handleClickAboutMenu(event)
                 : () => {}
             }
             className={"m-2 flex text-white whitespace-nowrap"}
@@ -130,57 +154,115 @@ const Header = (): JSX.Element => {
     });
   };
 
+  const displayFullMenu = (): JSX.Element => {
+    return (
+      <ThemeProvider theme={theme}>
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: { xs: "none", xl: "flex" },
+          }}
+        >
+          {displayMenu()}
+        </Box>
+      </ThemeProvider>
+    );
+  };
+
+  const [anchorElMobileMenu, setAnchorElMobileMenu] =
+    useState<null | HTMLElement>(null);
+
+  const [mobileVisible, setMobileVisible] = useState<Boolean>(false);
+
+  useEffect(() => {
+    window.addEventListener(
+      "resize",
+      () => {
+        const isMobileVisible = window.innerWidth < 1425;
+        if (isMobileVisible !== mobileVisible)
+          setMobileVisible(isMobileVisible);
+      },
+      false
+    );
+  }, [mobileVisible]);
+
+  const handleClickMobileMenu = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElMobileMenu(event.currentTarget);
+  };
+
+  const handleCloseMobileMenu = () => {
+    setAnchorElMobileMenu(null);
+  };
+
+  const displayMobileMenu = (): JSX.Element => {
+    return (
+      <ThemeProvider theme={theme}>
+        <Box
+          sx={{
+            flexGrow: 0,
+            display: { xs: "flex", xl: "none" },
+          }}
+        >
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleClickMobileMenu}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="mobile-menu"
+            anchorEl={anchorElMobileMenu}
+            open={Boolean(anchorElMobileMenu)}
+            onClose={handleCloseMobileMenu}
+            MenuListProps={{ onMouseLeave: handleCloseMobileMenu }}
+          >
+            {headerButtons.map((item, index) => (
+              <MenuItem key={index} onClick={handleCloseMobileMenu}>
+                <Link
+                  className="text-lg font-medium"
+                  type="submit"
+                  to={item.id}
+                  smooth={true}
+                  offset={-40}
+                >
+                  {item.label}
+                </Link>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      </ThemeProvider>
+    );
+  };
+
   return (
     <header>
-      <AppBar className="bg-regal-blue" sx={{ display: "flex" }}>
-        <Toolbar disableGutters>
+      <AppBar className="bg-regal-blue flex">
+        <Toolbar disableGutters className="flex justify-between">
+          {displayMobileMenu()}
           <Link
-            className="text-lg font-medium"
+            className={`text-lg font-medium self-center ${
+              mobileVisible ? "grow" : " "
+            }`}
             activeClass="active"
             type="submit"
             to={"welcome"}
             smooth={true}
-            offset={-40}
+            offset={-35}
           >
             <Typography
-              className={"whitespace-nowrap font-medium"}
+              className="whitespace-nowrap font-medium"
               variant="h4"
               component="h1"
             >
               Russell Online Learning
             </Typography>
           </Link>
-
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: "flex-end",
-            }}
-          >
-            {displayMenu()}
-          </Box>
-          {/* <Menu
-            id="menu-appbar"
-            anchorEl={anchorElNav}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            open={Boolean(anchorElNav)}
-            onClose={handleCloseNavMenu}
-            sx={{
-              display: { xs: "block", md: "none" },
-            }}
-          >
-            <MenuItem>Help</MenuItem>
-            {displayMenu()}
-          </Menu> */}
+          {displayFullMenu()}
         </Toolbar>
       </AppBar>
     </header>

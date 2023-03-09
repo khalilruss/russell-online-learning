@@ -1,7 +1,7 @@
 import "./App.css";
 import ImageNText from "./components/Image-N-Text/Image-N-Text";
 import PageSection from "./components/Page-Section/Page-Section";
-import content from "./assets/section-content";
+import content from "./content/section-content";
 import Header from "./components/Header/Header";
 
 {

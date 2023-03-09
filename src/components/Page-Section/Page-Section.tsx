@@ -1,7 +1,7 @@
 import React from "react";
 import "./Page-Section.css";
 
-export type PageSectionProps = {
+type PageSectionProps = {
   id: string;
   title: string;
   colouredBg: boolean;

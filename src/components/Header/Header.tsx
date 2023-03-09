@@ -2,15 +2,14 @@ import { useEffect, useState, MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-scroll";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
+import HeaderButton from "./Header-Button/Header-Button";
+import HeaderMenu from "./Header-Menu/Header-Menu";
+import { headerButtons, aboutMenuItems } from "../../content/header-content";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
@@ -35,139 +34,8 @@ const theme = createTheme({
 });
 
 const Header = (): JSX.Element => {
-  const headerButtons = [
-    {
-      label: "About",
-      id: "about",
-    },
-    {
-      label: "My Accomplishments",
-      id: "accomplishments",
-    },
-    {
-      label: "My Ethos",
-      id: "ethos",
-    },
-    {
-      label: "Testimonials",
-      id: "testimonials",
-    },
-    {
-      label: "Sessions and Prices",
-      id: "sessionsAndPrices",
-    },
-    {
-      label: "Contact Me",
-      id: "/contact",
-    },
-  ];
-
   const [anchorElAboutMenu, setAnchorElAboutMenu] =
     useState<null | HTMLElement>(null);
-
-  const handleClickAboutMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElAboutMenu(event.currentTarget);
-  };
-
-  const handleCloseAboutMenu = () => {
-    setAnchorElAboutMenu(null);
-  };
-
-  const displayAboutMenu = () => {
-    return (
-      <Menu
-        id="about-menu"
-        anchorEl={anchorElAboutMenu}
-        open={Boolean(anchorElAboutMenu)}
-        onClose={handleCloseAboutMenu}
-        MenuListProps={{ onMouseLeave: handleCloseAboutMenu }}
-      >
-        <MenuItem>
-          <Link
-            className="text-lg font-medium"
-            activeClass="active"
-            to="aboutROL"
-            smooth={true}
-            offset={-40}
-            onClick={handleCloseAboutMenu}
-          >
-            About Russell Online Learning
-          </Link>
-        </MenuItem>
-
-        <MenuItem>
-          <Link
-            className="text-lg font-medium"
-            activeClass="active"
-            type="submit"
-            to="aboutMe"
-            smooth={true}
-            offset={-40}
-            onClick={handleCloseAboutMenu}
-          >
-            About Me
-          </Link>
-        </MenuItem>
-      </Menu>
-    );
-  };
-
-  const propagateClick = (event: MouseEvent<HTMLElement>) => {
-    (
-      (event.target as HTMLButtonElement).children[0] as HTMLLinkElement
-    ).click();
-  };
-
-  const displayMenu = (): JSX.Element[] => {
-    return headerButtons.map((item, index) => {
-      return (
-        <div>
-          <Button
-            key={index}
-            endIcon={item.id === "about" ? <KeyboardArrowDownIcon /> : null}
-            onClick={
-              item.id === "about"
-                ? (event) => handleClickAboutMenu(event)
-                : (event) => propagateClick(event)
-            }
-            onMouseEnter={
-              item.id === "about"
-                ? (event) => handleClickAboutMenu(event)
-                : () => {}
-            }
-            className={"m-2 flex text-white whitespace-nowrap"}
-          >
-            <Link
-              className="text-lg font-medium"
-              activeClass="active"
-              type="submit"
-              to={item.id}
-              smooth={true}
-              offset={-40}
-            >
-              {item.label}
-            </Link>
-          </Button>
-          <div>{item.id === "about" ? displayAboutMenu() : null}</div>
-        </div>
-      );
-    });
-  };
-
-  const displayFullMenu = (): JSX.Element => {
-    return (
-      <ThemeProvider theme={theme}>
-        <Box
-          sx={{
-            flexGrow: 0,
-            display: { xs: "none", xl: "flex" },
-          }}
-        >
-          {displayMenu()}
-        </Box>
-      </ThemeProvider>
-    );
-  };
 
   const [anchorElMobileMenu, setAnchorElMobileMenu] =
     useState<null | HTMLElement>(null);
@@ -186,83 +54,112 @@ const Header = (): JSX.Element => {
     );
   }, [mobileVisible]);
 
-  const handleClickMobileMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElMobileMenu(event.currentTarget);
+  const handleClickMenu = (
+    menuType: "about" | "mobile",
+    event: MouseEvent<HTMLElement>
+  ) => {
+    if (menuType === "about") {
+      setAnchorElAboutMenu(event.currentTarget);
+    } else if (menuType === "mobile") {
+      setAnchorElMobileMenu(event.currentTarget);
+    }
   };
 
-  const handleCloseMobileMenu = () => {
-    setAnchorElMobileMenu(null);
+  const handleCloseMenu = (menuType: "about" | "mobile") => {
+    if (menuType === "about") {
+      setAnchorElAboutMenu(null);
+    } else if (menuType === "mobile") {
+      setAnchorElMobileMenu(null);
+    }
   };
 
-  const displayMobileMenu = (): JSX.Element => {
-    return (
-      <ThemeProvider theme={theme}>
-        <Box
-          sx={{
-            flexGrow: 0,
-            display: { xs: "flex", xl: "none" },
+  const propagateClick = (event: MouseEvent<HTMLElement>) => {
+    (
+      (event.target as HTMLButtonElement).children[0] as HTMLLinkElement
+    ).click();
+  };
+
+  const displayHeaderButtons = (): JSX.Element[] => {
+    return headerButtons.map((item, index) => {
+      return (
+        <HeaderButton
+          index={index}
+          id={item.id}
+          label={item.label}
+          handleClickAboutMenu={(event) => {
+            handleClickMenu("about", event);
           }}
-        >
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleClickMobileMenu}
-            color="inherit"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Menu
-            id="mobile-menu"
-            anchorEl={anchorElMobileMenu}
-            open={Boolean(anchorElMobileMenu)}
-            onClose={handleCloseMobileMenu}
-            MenuListProps={{ onMouseLeave: handleCloseMobileMenu }}
-          >
-            {headerButtons.map((item, index) => (
-              <MenuItem key={index} onClick={handleCloseMobileMenu}>
-                <Link
-                  className="text-lg font-medium"
-                  type="submit"
-                  to={item.id}
-                  smooth={true}
-                  offset={-40}
-                >
-                  {item.label}
-                </Link>
-              </MenuItem>
-            ))}
-          </Menu>
-        </Box>
-      </ThemeProvider>
-    );
+          propagateClick={propagateClick}
+        />
+      );
+    });
   };
 
   return (
     <header>
       <AppBar className="bg-regal-blue flex">
         <Toolbar disableGutters className="flex justify-between">
-          {displayMobileMenu()}
-          <Link
-            className={`text-lg font-medium self-center ${
-              mobileVisible ? "grow" : " "
-            }`}
-            activeClass="active"
-            type="submit"
-            to={"welcome"}
-            smooth={true}
-            offset={-35}
-          >
-            <Typography
-              className="whitespace-nowrap font-medium"
-              variant="h4"
-              component="h1"
+          <ThemeProvider theme={theme}>
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: { xs: "flex", xl: "none" },
+              }}
             >
-              Russell Online Learning
-            </Typography>
-          </Link>
-          {displayFullMenu()}
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={(event) => {
+                  handleClickMenu("mobile", event);
+                }}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <HeaderMenu
+                id="mobile-menu"
+                anchorEl={anchorElMobileMenu}
+                menuItems={headerButtons}
+                handleCloseMenu={() => handleCloseMenu("mobile")}
+                propagateClick={propagateClick}
+              />
+            </Box>
+            <Link
+              className={`text-lg font-medium self-center m-2 ${
+                mobileVisible ? "grow" : " "
+              }`}
+              activeClass="active"
+              type="submit"
+              to={"welcome"}
+              smooth={true}
+              offset={-35}
+            >
+              <Typography
+                className="whitespace-nowrap font-medium"
+                variant="h4"
+                component="h1"
+              >
+                Russell Online Learning
+              </Typography>
+            </Link>
+            <HeaderMenu
+              id="about-menu"
+              anchorEl={anchorElAboutMenu}
+              menuItems={aboutMenuItems}
+              handleCloseMenu={() => handleCloseMenu("about")}
+              propagateClick={propagateClick}
+            />
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: { xs: "none", xl: "flex" },
+              }}
+            >
+              {displayHeaderButtons()}
+            </Box>
+          </ThemeProvider>
         </Toolbar>
       </AppBar>
     </header>

@@ -28,7 +28,7 @@ const theme = createTheme({
       sm: 600,
       md: 900,
       lg: 1200,
-      xl: 1425,
+      xl: 1440,
     },
   },
 });
@@ -46,7 +46,7 @@ const Header = (): JSX.Element => {
     window.addEventListener(
       "resize",
       () => {
-        const isMobileVisible = window.innerWidth < 1425;
+        const isMobileVisible = window.innerWidth < 1440;
         if (isMobileVisible !== mobileVisible)
           setMobileVisible(isMobileVisible);
       },
@@ -100,35 +100,9 @@ const Header = (): JSX.Element => {
       <AppBar className="bg-regal-blue flex">
         <Toolbar disableGutters className="flex justify-between">
           <ThemeProvider theme={theme}>
-            <Box
-              sx={{
-                flexGrow: 0,
-                display: { xs: "flex", xl: "none" },
-              }}
-            >
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={(event) => {
-                  handleClickMenu("mobile", event);
-                }}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <HeaderMenu
-                id="mobile-menu"
-                anchorEl={anchorElMobileMenu}
-                menuItems={headerButtons}
-                handleCloseMenu={() => handleCloseMenu("mobile")}
-                propagateClick={propagateClick}
-              />
-            </Box>
             <Link
-              className={`text-lg font-medium self-center m-2 ${
-                mobileVisible ? "grow" : " "
+              className={`text-lg font-medium self-center ${
+                mobileVisible ? " relative left-[24px] grow" : " m-2 "
               }`}
               activeClass="active"
               type="submit"
@@ -158,6 +132,32 @@ const Header = (): JSX.Element => {
               }}
             >
               {displayHeaderButtons()}
+            </Box>
+            <Box
+              sx={{
+                flexGrow: 0,
+                display: { xs: "flex", xl: "none" },
+              }}
+            >
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={(event) => {
+                  handleClickMenu("mobile", event);
+                }}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <HeaderMenu
+                id="mobile-menu"
+                anchorEl={anchorElMobileMenu}
+                menuItems={headerButtons}
+                handleCloseMenu={() => handleCloseMenu("mobile")}
+                propagateClick={propagateClick}
+              />
             </Box>
           </ThemeProvider>
         </Toolbar>

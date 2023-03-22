@@ -1,9 +1,8 @@
 import "./App.css";
-import ImageNText from "./components/Image-N-Text/Image-N-Text";
 import PageSection from "./components/Page-Section/Page-Section";
 import content from "./content/section-content";
 import Header from "./components/Header/Header";
-
+import childrenImg from "./assets/school-children.webp";
 {
   /* "#e7edfa" */
 }
@@ -13,7 +12,7 @@ import Header from "./components/Header/Header";
 
 const App = (): JSX.Element => {
   const displayContent = (): JSX.Element[] => {
-    return content.map((section, index) => {
+    return content.slice(1).map((section, index) => {
       return (
         <PageSection
           key={index}
@@ -30,7 +29,18 @@ const App = (): JSX.Element => {
   return (
     <div className="App">
       <Header />
-      <ImageNText />
+      <div
+        id={content[0].id}
+        style={{
+          backgroundImage: `url(${childrenImg})`,
+        }}
+        className="welcome-section background-image"
+      >
+        <div>
+          <h1 className="welcome-title">{content[0].title}</h1>
+          {content[0].content}
+        </div>
+      </div>
       {displayContent()}
     </div>
   );

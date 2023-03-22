@@ -56,6 +56,15 @@ const displayAccordions = (): JSX.Element[] => {
 
 const sectionContent = [
   {
+    id: "welcome",
+    title: "Welcome to Russell Online Learning",
+    content: (
+      <p className="welcome-text">
+        To laugh as you learn and enjoy the process
+      </p>
+    ),
+  },
+  {
     id: "aboutROL",
     title: "About Russell Online Learning",
     content: (

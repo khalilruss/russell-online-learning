@@ -32,6 +32,6 @@ export const headerButtons = [
   },
   {
     label: "Contact Me",
-    id: "/contact",
+    id: "contact",
   },
 ];

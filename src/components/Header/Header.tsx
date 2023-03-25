@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import HeaderButton from "./Header-Button/Header-Button";
 import HeaderMenu from "./Header-Menu/Header-Menu";
 import { headerButtons, aboutMenuItems } from "../../content/header-content";
+import HeaderDrawer from "./Header-Drawer/HeaderDrawer";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
@@ -37,40 +38,36 @@ const Header = (): JSX.Element => {
   const [anchorElAboutMenu, setAnchorElAboutMenu] =
     useState<null | HTMLElement>(null);
 
-  const [anchorElMobileMenu, setAnchorElMobileMenu] =
-    useState<null | HTMLElement>(null);
+  const [drawerVisible, setDrawerVisible] = useState<Boolean>(false);
 
   const [mobileVisible, setMobileVisible] = useState<Boolean>(false);
+
+  const [changeLogo, setChangeLogo] = useState<Boolean>(false);
 
   useEffect(() => {
     window.addEventListener(
       "resize",
       () => {
         const isMobileVisible = window.innerWidth < 1440;
+        const smallerLogo = window.innerWidth < 600;
         if (isMobileVisible !== mobileVisible)
           setMobileVisible(isMobileVisible);
+        if (smallerLogo !== changeLogo) setChangeLogo(smallerLogo);
       },
       false
     );
-  }, [mobileVisible]);
+  }, [mobileVisible, changeLogo]);
 
-  const handleClickMenu = (
-    menuType: "about" | "mobile",
-    event: MouseEvent<HTMLElement>
-  ) => {
-    if (menuType === "about") {
-      setAnchorElAboutMenu(event.currentTarget);
-    } else if (menuType === "mobile") {
-      setAnchorElMobileMenu(event.currentTarget);
-    }
+  const handleClickMenu = (event: MouseEvent<HTMLElement>) => {
+    setAnchorElAboutMenu(event.currentTarget);
   };
 
-  const handleCloseMenu = (menuType: "about" | "mobile") => {
-    if (menuType === "about") {
-      setAnchorElAboutMenu(null);
-    } else if (menuType === "mobile") {
-      setAnchorElMobileMenu(null);
-    }
+  const handleCloseMenu = () => {
+    setAnchorElAboutMenu(null);
+  };
+
+  const toggleDrawer = (drawerOpen: true | false) => {
+    setDrawerVisible(drawerOpen);
   };
 
   const propagateClick = (event: MouseEvent<HTMLElement>) => {
@@ -87,7 +84,7 @@ const Header = (): JSX.Element => {
           id={item.id}
           label={item.label}
           handleClickAboutMenu={(event) => {
-            handleClickMenu("about", event);
+            handleClickMenu(event);
           }}
           propagateClick={propagateClick}
         />
@@ -115,14 +112,14 @@ const Header = (): JSX.Element => {
                 variant="h4"
                 component="h1"
               >
-                Russell Online Learning
+                {changeLogo ? "ROL" : "Russell Online Learning"}
               </Typography>
             </Link>
             <HeaderMenu
               id="about-menu"
               anchorEl={anchorElAboutMenu}
               menuItems={aboutMenuItems}
-              handleCloseMenu={() => handleCloseMenu("about")}
+              handleCloseMenu={() => handleCloseMenu()}
               propagateClick={propagateClick}
             />
             <Box
@@ -144,18 +141,18 @@ const Header = (): JSX.Element => {
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
-                onClick={(event) => {
-                  handleClickMenu("mobile", event);
+                onClick={() => {
+                  toggleDrawer(!drawerVisible);
                 }}
                 color="inherit"
               >
                 <MenuIcon />
               </IconButton>
-              <HeaderMenu
-                id="mobile-menu"
-                anchorEl={anchorElMobileMenu}
+              <HeaderDrawer
+                id="header-menu"
                 menuItems={headerButtons}
-                handleCloseMenu={() => handleCloseMenu("mobile")}
+                drawerVisible={Boolean(drawerVisible)}
+                toggleDrawer={toggleDrawer}
                 propagateClick={propagateClick}
               />
             </Box>

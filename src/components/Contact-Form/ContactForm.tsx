@@ -82,15 +82,24 @@ const ContactForm = (): JSX.Element => {
     console.log(JSON.stringify(data, null, 2));
   };
 
-  const displaySelectItem = (type: "age" | "year group") => {
+  const capitalize = (str: string): string => {
+    const words = str.split(" ");
+    return words
+      .map((word) => {
+        return word[0].toUpperCase() + word.substring(1);
+      })
+      .join(" ");
+  };
+
+  const displaySelectItem = (type: "child age" | "year group") => {
     return Array(5)
       .fill(0)
       .map((_, i) => (
         <MenuItem
           style={{ fontSize: "20px" }}
-          value={type === "age" ? i + 6 : `Year ${i + 2}`}
+          value={type === "child age" ? i + 6 : `Year ${i + 2}`}
         >
-          {type === "age" ? i + 6 : `Year ${i + 2}`}
+          {type === "child age" ? i + 6 : `Year ${i + 2}`}
         </MenuItem>
       ));
   };
@@ -130,69 +139,46 @@ const ContactForm = (): JSX.Element => {
       <CardContent>
         <Grid className="flex-col" container spacing={3}>
           <Grid className="flex justify-evenly items-center m-0" item>
-            <Controller
-              control={control}
-              name="child age"
-              render={(field) => (
-                <FormControl
-                  className="flex"
-                  required
-                  sx={{ m: 1, minWidth: 165 }}
-                >
-                  <InputLabel
-                    style={{ fontSize: "22px", color: "#3a54fb" }}
-                    id="child-age-label"
-                  >
-                    Child Age
-                  </InputLabel>
-                  <Select
-                    labelId="child-age-label"
-                    autoWidth
-                    className="bg-white"
-                    label="Child Age"
-                    input={
-                      <OutlinedInput
-                        sx={{ fontSize: "20px" }}
-                        label="Child Age"
-                      />
-                    }
-                    {...field}
-                  >
-                    {displaySelectItem("age")}
-                  </Select>
-                </FormControl>
-              )}
-            />
-            <Controller
-              control={control}
-              name="year groups"
-              render={(field) => (
-                <FormControl
-                  variant="outlined"
-                  required
-                  sx={{ m: 1, minWidth: 185 }}
-                >
-                  <InputLabel style={{ fontSize: "22px", color: "#3a54fb" }}>
-                    Year Group
-                  </InputLabel>
-                  <Select
-                    autoWidth
-                    className="bg-white"
-                    label="Year Group"
-                    {...field}
-                    input={
-                      <OutlinedInput
-                        sx={{ fontSize: "20px" }}
-                        label="Year Group"
-                        // color="textSecondary"s
-                      />
-                    }
-                  >
-                    {displaySelectItem("year group")}
-                  </Select>
-                </FormControl>
-              )}
-            />
+            {["child age", "year group"].map((value) => {
+              let width = value === "child age" ? 165 : 175;
+              return (
+                <Controller
+                  control={control}
+                  name={value}
+                  render={(field) => (
+                    <FormControl
+                      className="flex"
+                      required
+                      sx={{ m: 1, minWidth: width }}
+                    >
+                      <InputLabel
+                        style={{ fontSize: "22px", color: "#3a54fb" }}
+                        id={`${value}-label`}
+                      >
+                        {capitalize(value)}
+                      </InputLabel>
+                      <Select
+                        labelId={`${value}-label`}
+                        autoWidth
+                        className="bg-white"
+                        label={capitalize(value)}
+                        input={
+                          <OutlinedInput
+                            sx={{ fontSize: "20px" }}
+                            label={capitalize(value)}
+                          />
+                        }
+                        {...field}
+                      >
+                        {value === "child age"
+                          ? displaySelectItem("child age")
+                          : displaySelectItem("year group")}
+                      </Select>
+                    </FormControl>
+                  )}
+                />
+              );
+            })}
             <FormControl
               className="flex-row m-0"
               sx={{ m: 3 }}
@@ -207,60 +193,39 @@ const ContactForm = (): JSX.Element => {
                 Subject
               </FormLabel>
               <FormGroup className="flex-row">
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={maths}
-                      onChange={handleChange}
-                      name="maths"
+                {["maths", "english"].map((subject) => {
+                  return (
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={subject === "maths" ? maths : english}
+                          onChange={handleChange}
+                          name={subject}
+                        />
+                      }
+                      label={
+                        <Typography className="self-end" variant="h5">
+                          {capitalize(subject)}
+                        </Typography>
+                      }
+                      labelPlacement="end"
                     />
-                  }
-                  label={
-                    <Typography className="self-end" variant="h5">
-                      Maths
-                    </Typography>
-                  }
-                  labelPlacement="end"
-                />
-                <FormControlLabel
-                  labelPlacement="end"
-                  control={
-                    <Checkbox
-                      checked={english}
-                      onChange={handleChange}
-                      name="english"
-                    />
-                  }
-                  label={
-                    <Typography className="self-end" variant="h5">
-                      English
-                    </Typography>
-                  }
-                />
+                  );
+                })}
               </FormGroup>
             </FormControl>
           </Grid>
-          <FormInputText
-            name="name"
-            label="Name"
-            register={register}
-            errors={errors.name}
-            multiline={false}
-          />
-          <FormInputText
-            name="email"
-            label="Email"
-            register={register}
-            errors={errors.email}
-            multiline={false}
-          />
-          <FormInputText
-            name="message"
-            label="Message"
-            register={register}
-            errors={errors.message}
-            multiline={true}
-          />
+          {["name", "email", "message"].map((field) => {
+            return (
+              <FormInputText
+                name={field}
+                label={capitalize(field)}
+                register={register}
+                errors={errors[`${field}`]}
+                multiline={field === "message" ? true : false}
+              />
+            );
+          })}
           <Grid item spacing={{ xs: 8 }}>
             <Button
               type="submit"

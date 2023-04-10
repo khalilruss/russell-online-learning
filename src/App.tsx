@@ -2,6 +2,8 @@ import "./App.css";
 import PageSection from "./components/Page-Section/Page-Section";
 import content from "./content/section-content";
 import Header from "./components/Header/Header";
+import ContactForm from "./components/Contact-Form/ContactForm";
+import studyImg from "./assets/educacion_compensatoria_pequena.jpg";
 import childrenImg from "./assets/school-children.webp";
 {
   /* "#e7edfa" */
@@ -42,6 +44,15 @@ const App = (): JSX.Element => {
         </div>
       </div>
       {displayContent()}
+      <div
+        id="contact"
+        style={{
+          backgroundImage: `url(${studyImg})`,
+        }}
+        className="page-section p-8 background-image"
+      >
+        <ContactForm />
+      </div>
     </div>
   );
 };

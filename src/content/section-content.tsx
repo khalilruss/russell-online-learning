@@ -303,14 +303,10 @@ const sectionContent = [
           </div>
         </div>
         <br />
-        <p>
-          To book a lesson email russellonlinelearning@outlook.com
-          <br />
-          please note that responses will take 3 - 5 working days
-        </p>
+        <p>To book a lesson please use the contact form below</p>
         <p>
           During the first session, I will perform a free Maths or English
-          assessmen
+          assessment
         </p>
       </div>
     ),

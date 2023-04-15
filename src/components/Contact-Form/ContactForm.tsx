@@ -10,22 +10,13 @@ import FormInputText from "./Form-Input-Text/FormInputText";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import InputLabel from "@mui/material/InputLabel";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
 
-import {
-  useForm,
-  FieldValues,
-  Control,
-  FieldErrors,
-  Controller,
-} from "react-hook-form";
+import { useForm, FieldValues, Control, FieldErrors } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import { MenuItem, Select } from "@mui/material";
 import FormCheckbox from "./Form-Checkbox/FormCheckbox";
+import FormSelect from "./Form-Select/FormSelect";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -42,14 +33,6 @@ const validationSchema = Yup.object().shape({
   childAge: Yup.string().required("Select the child's age"),
   yearGroup: Yup.string().required("Select the child's year group"),
 });
-//subject
-
-export type FormInputProps = {
-  name: string;
-  control: Control<FieldValues>;
-  label: string;
-  errors: FieldErrors<FieldValues>;
-};
 
 const ContactForm = (): JSX.Element => {
   const form = useRef<HTMLFormElement | null>(null);
@@ -135,51 +118,19 @@ const ContactForm = (): JSX.Element => {
       <CardContent>
         <Grid className="flex-col" container spacing={3}>
           <Grid className="flex justify-evenly items-center m-0" item>
-            {["child age", "year group"].map((value) => {
-              let width = value === "child age" ? 165 : 175;
-              let name = value === "child age" ? "childAge" : "yearGroup";
+            {["child age", "year group"].map((name) => {
+              let width = name === "child age" ? 165 : 175;
+              let yupName = name === "child age" ? "childAge" : "yearGroup";
               return (
-                <div>
-                  <Controller
-                    control={control}
-                    name={name}
-                    render={({ field }) => (
-                      <FormControl
-                        className="flex w-fit"
-                        required
-                        sx={{ m: 1, minWidth: width }}
-                      >
-                        <InputLabel
-                          style={{ fontSize: "22px", color: "#3a54fb" }}
-                          id={`${name}-label`}
-                        >
-                          {capitalize(value)}
-                        </InputLabel>
-                        <Select
-                          labelId={`${name}-label`}
-                          autoWidth
-                          className="bg-white"
-                          label={capitalize(value)}
-                          input={
-                            <OutlinedInput
-                              sx={{ fontSize: "20px" }}
-                              label={capitalize(value)}
-                            />
-                          }
-                          error={errors[`${name}`] ? true : false}
-                          {...field}
-                        >
-                          {value === "child age"
-                            ? displaySelectItem("child age")
-                            : displaySelectItem("year group")}
-                        </Select>
-                      </FormControl>
-                    )}
-                  />
-                  <Typography variant="inherit" color="textSecondary">
-                    {errors[`${name}`]?.message?.toString()}
-                  </Typography>
-                </div>
+                <FormSelect
+                  name={name}
+                  yupName={yupName}
+                  width={width}
+                  errors={errors[`${yupName}`]}
+                  control={control}
+                  capitalize={capitalize}
+                  displaySelectItem={displaySelectItem}
+                />
               );
             })}
             <FormControl
@@ -187,7 +138,7 @@ const ContactForm = (): JSX.Element => {
               sx={{ m: 3 }}
               component="fieldset"
               variant="standard"
-              error={errors.subject ? true : false}
+              error={errors.subjects ? true : false}
             >
               <FormLabel
                 style={{ fontSize: "25px", color: "#3a54fb" }}

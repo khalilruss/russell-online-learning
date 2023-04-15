@@ -3,7 +3,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 
-export type FormCheckboxProps = {
+type FormCheckboxProps = {
   name: string;
   control: Control<FieldValues, any>;
   capitalize: (str: string) => string;

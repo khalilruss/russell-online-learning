@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Link, Button } from "react-scroll";
+import { Link } from "react-scroll";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";

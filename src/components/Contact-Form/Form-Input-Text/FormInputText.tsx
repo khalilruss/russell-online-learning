@@ -9,7 +9,7 @@ import {
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-export type FormInputProps = {
+type FormInputTextProps = {
   name: string;
   label: string;
   errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
@@ -23,7 +23,7 @@ const FormInputText = ({
   label,
   errors,
   multiline,
-}: FormInputProps) => {
+}: FormInputTextProps) => {
   return (
     <Grid item spacing={{ xs: 12 }}>
       <TextField

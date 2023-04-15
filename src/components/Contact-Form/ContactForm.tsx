@@ -1,4 +1,4 @@
-import { useRef, FormEvent, useState } from "react";
+import { useRef, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -30,8 +30,17 @@ const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
   email: Yup.string().required("Email is required").email("Email is invalid"),
   message: Yup.string().required("Please type a message"),
+  subjects: Yup.object()
+    .shape({
+      maths: Yup.boolean(),
+      english: Yup.boolean(),
+    })
+    .test("multiCheckbox", "Select at least one subject", (options) => {
+      return options.maths || options.english;
+    }),
+  childAge: Yup.string().required("Select the child's age"),
+  yearGroup: Yup.string().required("Select the child's year group"),
 });
-
 //subject
 
 export type FormInputProps = {
@@ -43,11 +52,6 @@ export type FormInputProps = {
 
 const ContactForm = (): JSX.Element => {
   const form = useRef<HTMLFormElement | null>(null);
-
-  const [checkboxState, setCheckboxState] = useState({
-    maths: false,
-    english: false,
-  });
 
   const {
     register,
@@ -104,15 +108,6 @@ const ContactForm = (): JSX.Element => {
       ));
   };
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckboxState({
-      ...checkboxState,
-      [event.target.name]: event.target.checked,
-    });
-  };
-
-  const { maths, english } = checkboxState;
-
   return (
     // bg-light-grey
     // bg-regal-blue
@@ -141,49 +136,57 @@ const ContactForm = (): JSX.Element => {
           <Grid className="flex justify-evenly items-center m-0" item>
             {["child age", "year group"].map((value) => {
               let width = value === "child age" ? 165 : 175;
+              let name = value === "child age" ? "childAge" : "yearGroup";
               return (
-                <Controller
-                  control={control}
-                  name={value}
-                  render={(field) => (
-                    <FormControl
-                      className="flex"
-                      required
-                      sx={{ m: 1, minWidth: width }}
-                    >
-                      <InputLabel
-                        style={{ fontSize: "22px", color: "#3a54fb" }}
-                        id={`${value}-label`}
+                <div>
+                  <Controller
+                    control={control}
+                    name={name}
+                    render={({ field }) => (
+                      <FormControl
+                        className="flex w-fit"
+                        required
+                        sx={{ m: 1, minWidth: width }}
                       >
-                        {capitalize(value)}
-                      </InputLabel>
-                      <Select
-                        labelId={`${value}-label`}
-                        autoWidth
-                        className="bg-white"
-                        label={capitalize(value)}
-                        input={
-                          <OutlinedInput
-                            sx={{ fontSize: "20px" }}
-                            label={capitalize(value)}
-                          />
-                        }
-                        {...field}
-                      >
-                        {value === "child age"
-                          ? displaySelectItem("child age")
-                          : displaySelectItem("year group")}
-                      </Select>
-                    </FormControl>
-                  )}
-                />
+                        <InputLabel
+                          style={{ fontSize: "22px", color: "#3a54fb" }}
+                          id={`${name}-label`}
+                        >
+                          {capitalize(value)}
+                        </InputLabel>
+                        <Select
+                          labelId={`${name}-label`}
+                          autoWidth
+                          className="bg-white"
+                          label={capitalize(value)}
+                          input={
+                            <OutlinedInput
+                              sx={{ fontSize: "20px" }}
+                              label={capitalize(value)}
+                            />
+                          }
+                          error={errors[`${name}`] ? true : false}
+                          {...field}
+                        >
+                          {value === "child age"
+                            ? displaySelectItem("child age")
+                            : displaySelectItem("year group")}
+                        </Select>
+                      </FormControl>
+                    )}
+                  />
+                  <Typography variant="inherit" color="textSecondary">
+                    {errors[`${name}`]?.message?.toString()}
+                  </Typography>
+                </div>
               );
             })}
             <FormControl
-              className="flex-row m-0"
+              className="flex-col m-0"
               sx={{ m: 3 }}
               component="fieldset"
               variant="standard"
+              error={errors.subject ? true : false}
             >
               <FormLabel
                 style={{ fontSize: "25px", color: "#3a54fb" }}
@@ -197,10 +200,14 @@ const ContactForm = (): JSX.Element => {
                   return (
                     <FormControlLabel
                       control={
-                        <Checkbox
-                          checked={subject === "maths" ? maths : english}
-                          onChange={handleChange}
-                          name={subject}
+                        <Controller
+                          name={
+                            subject === "maths"
+                              ? "subjects.maths"
+                              : "subjects.english"
+                          }
+                          control={control}
+                          render={({ field }) => <Checkbox {...field} />}
                         />
                       }
                       label={
@@ -213,6 +220,9 @@ const ContactForm = (): JSX.Element => {
                   );
                 })}
               </FormGroup>
+              <Typography variant="inherit" color="textSecondary">
+                {errors?.subjects?.message?.toString()}
+              </Typography>
             </FormControl>
           </Grid>
           {["name", "email", "message"].map((field) => {

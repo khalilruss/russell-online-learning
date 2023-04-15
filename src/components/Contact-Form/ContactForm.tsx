@@ -25,6 +25,7 @@ import {
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { MenuItem, Select } from "@mui/material";
+import FormCheckbox from "./Form-Checkbox/FormCheckbox";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -198,24 +199,10 @@ const ContactForm = (): JSX.Element => {
               <FormGroup className="flex-row">
                 {["maths", "english"].map((subject) => {
                   return (
-                    <FormControlLabel
-                      control={
-                        <Controller
-                          name={
-                            subject === "maths"
-                              ? "subjects.maths"
-                              : "subjects.english"
-                          }
-                          control={control}
-                          render={({ field }) => <Checkbox {...field} />}
-                        />
-                      }
-                      label={
-                        <Typography className="self-end" variant="h5">
-                          {capitalize(subject)}
-                        </Typography>
-                      }
-                      labelPlacement="end"
+                    <FormCheckbox
+                      name={subject}
+                      control={control}
+                      capitalize={capitalize}
                     />
                   );
                 })}

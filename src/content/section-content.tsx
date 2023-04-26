@@ -3,6 +3,16 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import smartTeachers from "../assets/smartTeachers.png";
+import teachingPersonnel from "../assets/teachingPersonnel.png";
+import CEPL from "../assets/CEPL.png";
+import zoom from "../assets/zoom.png";
+import powerpoint from "../assets/powerpoint.png";
+import bramble from "../assets/bramble.png";
+import googleClassroom from "../assets/googleClassroom.png";
+import studentNTeacher from "../assets/happy-student-teacher.png";
+import learningEnv from "../assets/learning-environment.png";
+import potential from "../assets/potential.png";
 
 const displayAccordions = (): JSX.Element[] => {
   const accordionAccomplisments = [
@@ -93,12 +103,12 @@ const sectionContent = [
         <p>
           My name is Veronica Russell, a primary school teacher with 9 years'
           experience working with children of differing abilities in inner
-          London schools.
-          <br />
-          Specializing in Maths and English (Reading and Writing), I have a
-          wealth of experience teaching children from age 6 to 9 (Year2 – Year
-          4).
-          <br />
+          London schools. Specializing in Maths and English (Reading and
+          Writing), I have a wealth of experience teaching children from age 6
+          to 9 (Year 2 – Year 4).
+        </p>
+        <br />
+        <p>
           Currently assigned to four primary schools as a registered tutor
           through the NTP – National Tutoring Programme, I deliver bespoke
           programmes to provide intensive support for children that need to
@@ -107,16 +117,32 @@ const sectionContent = [
           training and vetting process was undertaken. I also currently hold an
           enhanced DBS check.
         </p>
-        <ul className="list-disc list-inside">
-          I am currently registered with three Education Recruitment Agencies:
-          <li>Teaching Personnel</li>
-          <li>Smart Teachers</li>
-          <li>Connex Education</li>
-        </ul>
-        <p>
-          Also proficient in a number of learning platforms: Zoom, Powerpoint,
-          Bramble online classroom software and Google classrooms
-        </p>
+        <>
+          <br />
+          <p>
+            I am currently registered with three Education Recruitment Agencies:
+          </p>
+          <div className="pt-4 flex flex-row justify-evenly items-center">
+            <img
+              className="w-96"
+              src={teachingPersonnel}
+              alt="TeachingPersonnel"
+            />
+            <img className="w-96" src={smartTeachers} alt="SmartTeachers" />
+            <img className="w-96" src={CEPL} alt="CEPL" />
+          </div>
+        </>
+        {/* className="w-26" */}
+        <>
+          <br />
+          <p>Also proficient in a number of learning platforms:</p>
+          <div className="flex flex-row justify-evenly items-center">
+            <img className="w-24" src={zoom} alt="zoom" />
+            <img className="w-24" src={powerpoint} alt="powerpoint" />
+            <img className="w-60" src={bramble} alt="bramble" />
+            <img className="w-40" src={googleClassroom} alt="googleClassroom" />
+          </div>
+        </>
       </div>
     ),
   },
@@ -157,23 +183,39 @@ const sectionContent = [
     id: "ethos",
     title: "My Ethos",
     content: (
-      <div>
-        <b>
+      // items-center
+      <div className="flex flex-row">
+        <div className="flex flex-col items-center flex-1 mr-auto">
           <p>
-            To nurture a strong student/teacher relationship highlighting the
-            importance of mutual respect
+            <b>Create an enthusiastic learning environment</b>
           </p>
-          <br />
+          <img
+            className="w-48 mt-auto"
+            src={learningEnv}
+            alt="learningEnvironment"
+          />
+        </div>
+
+        <div className="flex flex-col items-center justify-center flex-1 ">
           <p>
-            To create an environment where a shared enthusiasm for learning
-            takes place.
+            <b>Nurture a strong student/teacher relationship</b>
           </p>
-          <br />
+          <img
+            className="w-64 mt-auto"
+            src={studentNTeacher}
+            alt="StudentNTeacher"
+          />
+        </div>
+        <div className="flex flex-col items-center flex-1 ml-auto">
           <p>
-            To teach to maximise every child’s full potential so that they can
-            become the best versions of themselves.
+            <b>Teach to maximise every child’s full potential</b>
           </p>
-        </b>
+          <img
+            className="w-48 mt-auto"
+            src={potential}
+            alt="learningEnvironment"
+          />
+        </div>
       </div>
     ),
   },

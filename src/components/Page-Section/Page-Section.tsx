@@ -6,24 +6,27 @@ type PageSectionProps = {
   title: string;
   colouredBg: boolean;
   children: React.ReactNode;
+  className?: string;
+  contentClassName?: string;
 };
-
-// "lineHeight":"1.8"
-// "lineHeight":"1.2"
 
 const PageSection = ({
   id,
   title,
   colouredBg,
   children,
+  className,
+  contentClassName,
 }: PageSectionProps): JSX.Element => {
   return (
     <div
       id={id}
-      className={`page-section ${colouredBg ? "bg-light-grey" : ""}`}
+      className={`page-section ${
+        colouredBg ? "bg-light-grey" : ""
+      } ${className}`}
     >
       <h2 className="section-title">{title}</h2>
-      <div className="section-content">{children}</div>
+      <div className={`section-content ${contentClassName}`}>{children}</div>
     </div>
   );
 };

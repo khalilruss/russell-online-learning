@@ -21,6 +21,7 @@ const App = (): JSX.Element => {
           id={section.id}
           title={section.title}
           colouredBg={index % 2 === 0 ? false : true}
+          contentClassName={section.id === "ethos" ? "w-3/4" : ""}
         >
           {section.content}
         </PageSection>

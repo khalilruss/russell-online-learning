@@ -1,5 +1,6 @@
 import React from "react";
 import "./Page-Section.css";
+import { motion } from "framer-motion";
 
 type PageSectionProps = {
   id: string;
@@ -19,15 +20,21 @@ const PageSection = ({
   contentClassName,
 }: PageSectionProps): JSX.Element => {
   return (
-    <div
-      id={id}
-      className={`page-section ${
-        colouredBg ? "bg-light-grey" : ""
-      } ${className}`}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
     >
-      <h2 className="section-title">{title}</h2>
-      <div className={`section-content ${contentClassName}`}>{children}</div>
-    </div>
+      <div
+        id={id}
+        className={`page-section ${
+          colouredBg ? "bg-light-grey" : ""
+        } ${className}`}
+      >
+        <h2 className="section-title">{title}</h2>
+        <div className={`section-content ${contentClassName}`}>{children}</div>
+      </div>
+    </motion.div>
   );
 };
 

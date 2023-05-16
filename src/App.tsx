@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import ContactForm from "./components/Contact-Form/ContactForm";
 import studyImg from "./assets/educacion_compensatoria_pequena.jpg";
 import childrenImg from "./assets/school-children.webp";
+import { motion } from "framer-motion";
 {
   /* "#e7edfa" */
 }
@@ -32,18 +33,29 @@ const App = (): JSX.Element => {
   return (
     <div className="App">
       <Header />
-      <div
-        id={content[0].id}
-        style={{
-          backgroundImage: `url(${childrenImg})`,
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        transition={{ ease: "easeIn", duration: 0.4 }}
+        viewport={{ once: false }}
+        variants={{
+          visible: { opacity: 1 },
+          hidden: { opacity: 0 },
         }}
-        className="welcome-section background-image"
       >
-        <div>
-          <h1 className="welcome-title">{content[0].title}</h1>
-          {content[0].content}
+        <div
+          id={content[0].id}
+          style={{
+            backgroundImage: `url(${childrenImg})`,
+          }}
+          className="welcome-section background-image"
+        >
+          <div>
+            <h1 className="welcome-title">{content[0].title}</h1>
+            {content[0].content}
+          </div>
         </div>
-      </div>
+      </motion.div>
       {displayContent()}
       <div
         id="contact"
@@ -52,7 +64,18 @@ const App = (): JSX.Element => {
         }}
         className="page-section p-8 background-image"
       >
-        <ContactForm />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.3 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: 100 },
+          }}
+        >
+          <ContactForm />
+        </motion.div>
       </div>
     </div>
   );

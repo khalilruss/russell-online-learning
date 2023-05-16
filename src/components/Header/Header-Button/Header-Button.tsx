@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-scroll";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { HeaderMenuItem } from "../Header-Menu/Header-Menu";
+import { motion } from "framer-motion";
 
 type HeaderButtonProps = {
   index: number;
@@ -24,6 +25,12 @@ const HeaderButton = ({
       <Button
         key={index}
         endIcon={label === "About" ? <KeyboardArrowDownIcon /> : null}
+        component={motion.div}
+        whileHover={{
+          scale: 1.1,
+          transition: { duration: 0.2 },
+        }}
+        whileTap={{ scale: 0.9 }}
         onClick={
           label === "About"
             ? (event) => handleClickAboutMenu(event)

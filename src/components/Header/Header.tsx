@@ -11,6 +11,7 @@ import HeaderButton from "./Header-Button/Header-Button";
 import HeaderMenu from "./Header-Menu/Header-Menu";
 import { headerButtons, aboutMenuItems } from "../../content/header-content";
 import HeaderDrawer from "./Header-Drawer/HeaderDrawer";
+import { motion } from "framer-motion";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
@@ -107,14 +108,27 @@ const Header = (): JSX.Element => {
               smooth={true}
               offset={-35}
             >
-              <Typography
-                className="whitespace-nowrap font-medium"
-                variant="h4"
-                component="h1"
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ type: "spring", delay: 0.2, stiffness: 120 }}
               >
-                {changeLogo ? "ROL" : "Russell Online Learning"}
-              </Typography>
+                <Typography
+                  className="whitespace-nowrap font-medium"
+                  variant="h4"
+                  // component="h1"
+                  component={motion.h1}
+                  whileHover={{
+                    scale: 1.05,
+                    transition: { duration: 0.2 },
+                  }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {changeLogo ? "ROL" : "Russell Online Learning"}
+                </Typography>
+              </motion.div>
             </Link>
+
             <HeaderMenu
               id="about-menu"
               anchorEl={anchorElAboutMenu}
@@ -122,14 +136,20 @@ const Header = (): JSX.Element => {
               handleCloseMenu={() => handleCloseMenu()}
               propagateClick={propagateClick}
             />
-            <Box
-              sx={{
-                flexGrow: 0,
-                display: { xs: "none", xl: "flex" },
-              }}
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ type: "spring", delay: 0.2, stiffness: 120 }}
             >
-              {displayHeaderButtons()}
-            </Box>
+              <Box
+                sx={{
+                  flexGrow: 0,
+                  display: { xs: "none", xl: "flex" },
+                }}
+              >
+                {displayHeaderButtons()}
+              </Box>
+            </motion.div>
             <Box
               sx={{
                 flexGrow: 0,

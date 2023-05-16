@@ -13,6 +13,43 @@ import googleClassroom from "../assets/googleClassroom.png";
 import studentNTeacher from "../assets/happy-student-teacher.png";
 import learningEnv from "../assets/learning-environment.png";
 import potential from "../assets/potential.png";
+import { motion } from "framer-motion";
+
+// const container = {
+//   visible: {
+//     transition: {
+//       staggerChildren: 0.2,
+//     },
+//   },
+// };
+
+const itemRight = {
+  hidden: {
+    opacity: 0,
+    x: -20,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: "easeInOut",
+    },
+  },
+};
+
+const itemLeft = {
+  hidden: {
+    opacity: 0,
+    x: 20,
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: "easeInOut",
+    },
+  },
+};
 
 const displayAccordions = (): JSX.Element[] => {
   const accordionAccomplisments = [
@@ -53,6 +90,12 @@ const displayAccordions = (): JSX.Element[] => {
         <AccordionSummary
           className="bg-regal-blue text-white"
           expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+          component={motion.div}
+          whileHover={{
+            scale: 1.025,
+            transition: { duration: 0.2 },
+          }}
+          whileTap={{ scale: 1 }}
         >
           {accordion.summary}
         </AccordionSummary>
@@ -96,6 +139,78 @@ const sectionContent = [
     ),
   },
   {
+    id: "ethos",
+    title: "My Ethos",
+    content: (
+      // items-center
+      <div className="flex flex-row">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.4 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, x: 0 },
+            hidden: { opacity: 0, x: -150 },
+          }}
+        >
+          <div className="flex flex-col items-center flex-1 mr-auto">
+            <p>
+              <b>Create an enthusiastic learning environment</b>
+            </p>
+            <img
+              className="w-48 mt-auto"
+              src={learningEnv}
+              alt="learningEnvironment"
+            />
+          </div>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.3 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: 150 },
+          }}
+        >
+          <div className="flex flex-col items-center justify-center flex-1 ">
+            <p>
+              <b>Nurture a strong student/teacher relationship</b>
+            </p>
+            <img
+              className="w-64 mt-auto"
+              src={studentNTeacher}
+              alt="StudentNTeacher"
+            />
+          </div>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.3 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, x: 0 },
+            hidden: { opacity: 0, x: 150 },
+          }}
+        >
+          <div className="flex flex-col items-center flex-1 ml-auto">
+            <p>
+              <b>Teach to maximise every child’s full potential</b>
+            </p>
+            <img
+              className="w-48 mt-auto"
+              src={potential}
+              alt="learningEnvironment"
+            />
+          </div>
+        </motion.div>
+      </div>
+    ),
+  },
+  {
     id: "aboutMe",
     title: "About Me",
     content: (
@@ -122,26 +237,70 @@ const sectionContent = [
           <p>
             I am currently registered with three Education Recruitment Agencies:
           </p>
-          <div className="pt-4 flex flex-row justify-evenly items-center">
-            <img
-              className="w-96"
-              src={teachingPersonnel}
-              alt="TeachingPersonnel"
-            />
-            <img className="w-96" src={smartTeachers} alt="SmartTeachers" />
-            <img className="w-96" src={CEPL} alt="CEPL" />
-          </div>
+          <motion.div
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.2,
+                },
+              },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+          >
+            <div className="pt-4 flex flex-row justify-evenly items-center">
+              <motion.div variants={itemRight}>
+                <img
+                  className="w-96"
+                  src={teachingPersonnel}
+                  alt="TeachingPersonnel"
+                />
+              </motion.div>
+              <motion.div variants={itemRight}>
+                <img className="w-96" src={smartTeachers} alt="SmartTeachers" />
+              </motion.div>
+              <motion.div variants={itemRight}>
+                <img className="w-96" src={CEPL} alt="CEPL" />
+              </motion.div>
+            </div>
+          </motion.div>
         </>
         {/* className="w-26" */}
         <>
           <br />
           <p>Also proficient in a number of learning platforms:</p>
-          <div className="flex flex-row justify-evenly items-center">
-            <img className="w-24" src={zoom} alt="zoom" />
-            <img className="w-24" src={powerpoint} alt="powerpoint" />
-            <img className="w-60" src={bramble} alt="bramble" />
-            <img className="w-40" src={googleClassroom} alt="googleClassroom" />
-          </div>
+          <motion.div
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.15,
+                },
+              },
+            }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false }}
+          >
+            <div className="flex flex-row justify-evenly items-center">
+              <motion.div variants={itemLeft}>
+                <img className="w-24" src={zoom} alt="zoom" />
+              </motion.div>
+              <motion.div variants={itemLeft}>
+                <img className="w-24" src={powerpoint} alt="powerpoint" />
+              </motion.div>
+              <motion.div variants={itemLeft}>
+                <img className="w-60" src={bramble} alt="bramble" />
+              </motion.div>
+              <motion.div variants={itemLeft}>
+                <img
+                  className="w-40"
+                  src={googleClassroom}
+                  alt="googleClassroom"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
         </>
       </div>
     ),
@@ -176,46 +335,6 @@ const sectionContent = [
           worked as a cohesive team to create an environment where all the needs
           of our pupils were met, and they were in a position to excel.
         </p>
-      </div>
-    ),
-  },
-  {
-    id: "ethos",
-    title: "My Ethos",
-    content: (
-      // items-center
-      <div className="flex flex-row">
-        <div className="flex flex-col items-center flex-1 mr-auto">
-          <p>
-            <b>Create an enthusiastic learning environment</b>
-          </p>
-          <img
-            className="w-48 mt-auto"
-            src={learningEnv}
-            alt="learningEnvironment"
-          />
-        </div>
-
-        <div className="flex flex-col items-center justify-center flex-1 ">
-          <p>
-            <b>Nurture a strong student/teacher relationship</b>
-          </p>
-          <img
-            className="w-64 mt-auto"
-            src={studentNTeacher}
-            alt="StudentNTeacher"
-          />
-        </div>
-        <div className="flex flex-col items-center flex-1 ml-auto">
-          <p>
-            <b>Teach to maximise every child’s full potential</b>
-          </p>
-          <img
-            className="w-48 mt-auto"
-            src={potential}
-            alt="learningEnvironment"
-          />
-        </div>
       </div>
     ),
   },

@@ -1,6 +1,8 @@
 import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
+
 import {
   Control,
   Controller,
@@ -19,7 +21,6 @@ type FormSelectProps = {
   width: number;
   errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   capitalize: (str: string) => string;
-  displaySelectItem: (type: "child age" | "year group") => JSX.Element[];
 };
 
 const FormSelect = ({
@@ -29,25 +30,38 @@ const FormSelect = ({
   width,
   errors,
   capitalize,
-  displaySelectItem,
 }: FormSelectProps): JSX.Element => {
+  const displaySelectItem = (type: "child age" | "year group") => {
+    return Array(5)
+      .fill(0)
+      .map((_, i) => (
+        <MenuItem
+          style={{ fontSize: "20px" }}
+          value={type === "child age" ? i + 6 : `Year ${i + 2}`}
+        >
+          {type === "child age" ? i + 6 : `Year ${i + 2}`}
+        </MenuItem>
+      ));
+  };
+
   return (
     <div>
-      <Controller
-        control={control}
-        name={yupName}
-        render={({ field }) => (
-          <FormControl
-            className="flex w-fit"
-            required
-            sx={{ m: 1, minWidth: width }}
-          >
-            <InputLabel
-              style={{ fontSize: "22px", color: "#3a54fb" }}
-              id={`${yupName}-label`}
-            >
-              {capitalize(name)}
-            </InputLabel>
+      <FormControl
+        className="flex w-fit"
+        required
+        sx={{ m: 1, minWidth: width }}
+      >
+        <InputLabel
+          style={{ fontSize: "22px", color: "#3a54fb" }}
+          id={`${yupName}-label`}
+        >
+          {capitalize(name)}
+        </InputLabel>
+        <Controller
+          control={control}
+          name={yupName}
+          defaultValue=""
+          render={({ field }) => (
             <Select
               labelId={`${yupName}-label`}
               autoWidth
@@ -64,9 +78,10 @@ const FormSelect = ({
             >
               {displaySelectItem(`${name as "child age" | "year group"}`)}
             </Select>
-          </FormControl>
-        )}
-      />
+          )}
+        />
+      </FormControl>
+
       <Typography variant="inherit" color="textSecondary">
         {errors?.message?.toString()}
       </Typography>

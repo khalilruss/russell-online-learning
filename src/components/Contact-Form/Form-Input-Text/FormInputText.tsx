@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 
 type FormInputTextProps = {
   name: string;
+  yupName: string;
   label: string;
   errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   multiline: boolean;
@@ -20,6 +21,7 @@ type FormInputTextProps = {
 const FormInputText = ({
   name,
   register,
+  yupName,
   label,
   errors,
   multiline,
@@ -42,8 +44,9 @@ const FormInputText = ({
         InputLabelProps={{
           style: { fontSize: "24px", color: "#3a54fb" },
         }}
-        {...register(name)}
+        {...register(yupName)}
         error={errors ? true : false}
+        defaultValue=""
       />
       <Typography variant="inherit" color="textSecondary" className="text-left">
         {errors?.message?.toString()}

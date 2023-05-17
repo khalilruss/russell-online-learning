@@ -6,12 +6,6 @@ import ContactForm from "./components/Contact-Form/ContactForm";
 import studyImg from "./assets/educacion_compensatoria_pequena.jpg";
 import childrenImg from "./assets/school-children.webp";
 import { motion } from "framer-motion";
-{
-  /* "#e7edfa" */
-}
-{
-  /* #FAF4E7 */
-}
 
 const App = (): JSX.Element => {
   const displayContent = (): JSX.Element[] => {

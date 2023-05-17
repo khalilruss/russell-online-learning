@@ -1,4 +1,4 @@
-import { useRef, FormEvent } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -10,17 +10,23 @@ import FormInputText from "./Form-Input-Text/FormInputText";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
-import MenuItem from "@mui/material/MenuItem";
 
-import { useForm, FieldValues, Control, FieldErrors } from "react-hook-form";
+import { useForm, FieldValues } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import FormCheckbox from "./Form-Checkbox/FormCheckbox";
 import FormSelect from "./Form-Select/FormSelect";
+import { motion } from "framer-motion";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+const emailRegex =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().required("Email is required").email("Email is invalid"),
+  contact_name: Yup.string().required("Name is required"),
+  contact_email: Yup.string()
+    .required("Email is required")
+    .matches(emailRegex, "Email is invalid"),
   message: Yup.string().required("Please type a message"),
   subjects: Yup.object()
     .shape({
@@ -30,44 +36,69 @@ const validationSchema = Yup.object().shape({
     .test("multiCheckbox", "Select at least one subject", (options) => {
       return options.maths || options.english;
     }),
-  childAge: Yup.string().required("Select the child's age"),
-  yearGroup: Yup.string().required("Select the child's year group"),
+  child_age: Yup.string().required("Select the child's age"),
+  year_group: Yup.string().required("Select the child's year group"),
 });
 
+const defaultValues = {
+  contact_name: "",
+  contact_email: "",
+  message: "",
+};
+
 const ContactForm = (): JSX.Element => {
-  const form = useRef<HTMLFormElement | null>(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
   });
 
-  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        form.current as HTMLFormElement,
-        "YOUR_PUBLIC_KEY"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
+  const sendEmail = (formData: FieldValues) => {
+    setIsDisabled(true);
+    formData.subjects = Object.keys(formData.subjects)
+      .filter((k) => formData.subjects[k])
+      .toString();
+    console.log(formData);
+    toast.promise(
+      emailjs.send(
+        "rol_contact_service",
+        "rol_form_template",
+        formData,
+        "hC5XDG1CozhhJbH2F"
+      ),
+      {
+        pending: {
+          render() {
+            return "Sending Message";
+          },
         },
-        (error) => {
-          console.log(error.text);
-        }
-      );
-  };
-
-  const onSubmit = (data: FieldValues) => {
-    console.log(JSON.stringify(data, null, 2));
+        success: {
+          render() {
+            reset(defaultValues);
+            setIsDisabled(false);
+            return "Message Sent";
+          },
+        },
+        error: {
+          render() {
+            setIsDisabled(false);
+            return "Something went wrong, Please try again";
+          },
+        },
+      },
+      {
+        className: "bg-light-grey text-black",
+        pauseOnHover: false,
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2500,
+      }
+    );
   };
 
   const capitalize = (str: string): string => {
@@ -79,23 +110,7 @@ const ContactForm = (): JSX.Element => {
       .join(" ");
   };
 
-  const displaySelectItem = (type: "child age" | "year group") => {
-    return Array(5)
-      .fill(0)
-      .map((_, i) => (
-        <MenuItem
-          style={{ fontSize: "20px" }}
-          value={type === "child age" ? i + 6 : `Year ${i + 2}`}
-        >
-          {type === "child age" ? i + 6 : `Year ${i + 2}`}
-        </MenuItem>
-      ));
-  };
-
   return (
-    // bg-light-grey
-    // bg-regal-blue
-
     <Card elevation={8} className="bg-light-grey">
       <CardHeader
         className="w-full bg-regal-blue text-white"
@@ -120,7 +135,7 @@ const ContactForm = (): JSX.Element => {
           <Grid className="flex justify-evenly items-center m-0" item>
             {["child age", "year group"].map((name) => {
               let width = name === "child age" ? 165 : 175;
-              let yupName = name === "child age" ? "childAge" : "yearGroup";
+              let yupName = name.replace(" ", "_");
               return (
                 <FormSelect
                   name={name}
@@ -129,7 +144,6 @@ const ContactForm = (): JSX.Element => {
                   errors={errors[`${yupName}`]}
                   control={control}
                   capitalize={capitalize}
-                  displaySelectItem={displaySelectItem}
                 />
               );
             })}
@@ -164,28 +178,40 @@ const ContactForm = (): JSX.Element => {
             </FormControl>
           </Grid>
           {["name", "email", "message"].map((field) => {
+            let yupName =
+              field === "name" || field === "email"
+                ? `contact_${field}`
+                : field;
             return (
               <FormInputText
                 name={field}
+                yupName={yupName}
                 label={capitalize(field)}
                 register={register}
-                errors={errors[`${field}`]}
+                errors={errors[`${yupName}`]}
                 multiline={field === "message" ? true : false}
               />
             );
           })}
           <Grid item spacing={{ xs: 8 }}>
             <Button
-              type="submit"
               variant="contained"
               className="bg-regal-blue text-white text-[25px]"
-              onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit(sendEmail)}
+              disabled={isDisabled}
+              component={motion.div}
+              whileHover={{
+                scale: 1.1,
+                transition: { duration: 0.2 },
+              }}
+              whileTap={{ scale: 0.9 }}
             >
               Submit
             </Button>
           </Grid>
         </Grid>
       </CardContent>
+      <ToastContainer limit={1} />
     </Card>
   );
 };

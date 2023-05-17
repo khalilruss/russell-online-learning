@@ -275,6 +275,7 @@ const sectionContent = [
               visible: {
                 transition: {
                   staggerChildren: 0.15,
+                  staggerDirection: -1,
                 },
               },
             }}

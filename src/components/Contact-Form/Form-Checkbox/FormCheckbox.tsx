@@ -20,7 +20,9 @@ const FormCheckbox = ({
         <Controller
           name={`subjects.${name}`}
           control={control}
-          render={({ field }) => <Checkbox {...field} />}
+          render={({ field: { value, ...field } }) => (
+            <Checkbox {...field} checked={!!value} />
+          )}
         />
       }
       label={

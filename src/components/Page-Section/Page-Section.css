@@ -5,16 +5,16 @@
 }
 
 .section-title {
-  font-size: 50px;
+  font-size: 3.125rem;
   font-weight: bold;
-  margin: 50px auto auto;
+  margin: 3.125rem auto auto;
   color: #3a54fb;
 }
 
 .section-content {
-  font-size: 25px;
+  font-size: 1.5625rem;
   width: 65%;
-  margin: 25px auto 50px;
+  margin: 1.5625rem auto 3.125rem;
   line-height: 1.8;
 }
 

@@ -6,7 +6,7 @@
 
 .header {
   background-color: #3a54fb;
-  font-size: 25px;
+  font-size: 1.5625rem;
   font-weight: bold;
 }
 
@@ -19,19 +19,19 @@
 .welcome-title {
   color: white;
   text-align: center;
-  font-size: 88px;
+  font-size: 5.5rem;
   margin: auto;
 }
 .welcome-text {
   color: white;
-  font-size: 40px;
-  margin: 20px;
+  font-size: 2.5rem;
+  margin: 1.25rem;
 }
 
 .welcome-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 399px;
-  padding-bottom: 335px;
+  padding-top: 24.9375rem;
+  padding-bottom: 20.9375rem;
 }

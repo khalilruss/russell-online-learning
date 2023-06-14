@@ -124,7 +124,10 @@ const ContactForm = (): JSX.Element => {
           </Typography>
         }
         subheader={
-          <Typography className="whitespace-nowrap text-[25px]" variant="h6">
+          <Typography
+            className="whitespace-nowrap text-[1.5625rem]"
+            variant="h6"
+          >
             To book a session please send me a message using this contact form
             <br /> and I will aim to respond within 3 - 5 working days
           </Typography>
@@ -155,7 +158,7 @@ const ContactForm = (): JSX.Element => {
               error={errors.subjects ? true : false}
             >
               <FormLabel
-                style={{ fontSize: "25px", color: "#3a54fb" }}
+                style={{ fontSize: "1.5625rem", color: "#3a54fb" }}
                 className="w-full"
                 component="legend"
               >
@@ -196,7 +199,7 @@ const ContactForm = (): JSX.Element => {
           <Grid item spacing={{ xs: 8 }}>
             <Button
               variant="contained"
-              className="bg-regal-blue text-white text-[25px]"
+              className="bg-regal-blue text-white text-[1.5625rem]"
               onClick={handleSubmit(sendEmail)}
               disabled={isDisabled}
               component={motion.div}

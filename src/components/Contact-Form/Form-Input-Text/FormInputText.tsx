@@ -39,10 +39,10 @@ const FormInputText = ({
         multiline={multiline}
         rows={multiline ? 4 : 1}
         InputProps={{
-          style: { fontSize: "22px" },
+          style: { fontSize: "1.375rem" },
         }}
         InputLabelProps={{
-          style: { fontSize: "24px", color: "#3a54fb" },
+          style: { fontSize: "1.5rem", color: "#3a54fb" },
         }}
         {...register(yupName)}
         error={errors ? true : false}

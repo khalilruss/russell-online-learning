@@ -100,7 +100,7 @@ const Header = (): JSX.Element => {
           <ThemeProvider theme={theme}>
             <Link
               className={`text-lg font-medium self-center ${
-                mobileVisible ? " relative left-[24px] grow" : " m-2 "
+                mobileVisible ? " relative left-[1.5rem] grow" : " m-2 "
               }`}
               activeClass="active"
               type="submit"

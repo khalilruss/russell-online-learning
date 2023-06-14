@@ -36,7 +36,7 @@ const FormSelect = ({
       .fill(0)
       .map((_, i) => (
         <MenuItem
-          style={{ fontSize: "20px" }}
+          style={{ fontSize: "1.25rem" }}
           value={type === "child age" ? i + 6 : `Year ${i + 2}`}
         >
           {type === "child age" ? i + 6 : `Year ${i + 2}`}
@@ -52,7 +52,7 @@ const FormSelect = ({
         sx={{ m: 1, minWidth: width }}
       >
         <InputLabel
-          style={{ fontSize: "22px", color: "#3a54fb" }}
+          style={{ fontSize: "1.375rem", color: "#3a54fb" }}
           id={`${yupName}-label`}
         >
           {capitalize(name)}
@@ -69,7 +69,7 @@ const FormSelect = ({
               label={capitalize(name)}
               input={
                 <OutlinedInput
-                  sx={{ fontSize: "20px" }}
+                  sx={{ fontSize: "1.25rem" }}
                   label={capitalize(name)}
                 />
               }

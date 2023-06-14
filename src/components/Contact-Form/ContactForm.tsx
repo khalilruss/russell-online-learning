@@ -110,13 +110,27 @@ const ContactForm = (): JSX.Element => {
       .join(" ");
   };
 
+  // useEffect(() => {
+  //   window.addEventListener(
+  //     "resize",
+  //     () => {
+  //       // const isMobileVisible = window.innerWidth < 1440;
+  //       // const smallerLogo = window.innerWidth < 600;
+  //       // if (isMobileVisible !== mobileVisible)
+  //       //   setMobileVisible(isMobileVisible);
+  //       // if (smallerLogo !== changeLogo) setChangeLogo(smallerLogo);
+  //     },
+  //     false
+  //   );
+  // }, []);
+  // sx={{ width: cardWidth }}
   return (
-    <Card elevation={8} className="bg-light-grey">
+    <Card elevation={8} className="bg-light-grey min-w-[32.75rem] ">
       <CardHeader
         className="w-full bg-regal-blue text-white"
         title={
           <Typography
-            className="whitespace-nowrap font-medium"
+            className="whitespace-wrap font-medium"
             variant="h2"
             component="h1"
           >
@@ -124,10 +138,7 @@ const ContactForm = (): JSX.Element => {
           </Typography>
         }
         subheader={
-          <Typography
-            className="whitespace-nowrap text-[1.5625rem]"
-            variant="h6"
-          >
+          <Typography className="whitespace-wrap text-[1.5625rem]" variant="h6">
             To book a session please send me a message using this contact form
             <br /> and I will aim to respond within 3 - 5 working days
           </Typography>
@@ -164,7 +175,7 @@ const ContactForm = (): JSX.Element => {
               >
                 Subject
               </FormLabel>
-              <FormGroup className="flex-row">
+              <FormGroup className="flex-row justify-center">
                 {["maths", "english"].map((subject) => {
                   return (
                     <FormCheckbox

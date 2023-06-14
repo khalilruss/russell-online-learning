@@ -16,6 +16,7 @@ const FormCheckbox = ({
 }: FormCheckboxProps): JSX.Element => {
   return (
     <FormControlLabel
+      className="m-0"
       control={
         <Controller
           name={`subjects.${name}`}

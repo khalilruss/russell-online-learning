@@ -349,7 +349,7 @@ const sectionContent = [
           teaching and is reflected in the testimonies below:
         </p>
         <br />
-        <Carousel>
+        <Carousel autoPlay={false}>
           <div>
             <h3>
               <b>Head teacher of Hopton Primary School</b>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";

@@ -142,7 +142,7 @@ const sectionContent = [
     id: "ethos",
     title: "My Ethos",
     content: (
-      <div className="flex flex-row">
+      <div className="flex flex-row overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"

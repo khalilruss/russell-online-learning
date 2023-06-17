@@ -2,6 +2,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Control, Controller, FieldValues } from "react-hook-form";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 type FormCheckboxProps = {
   name: string;
@@ -14,6 +15,8 @@ const FormCheckbox = ({
   control,
   capitalize,
 }: FormCheckboxProps): JSX.Element => {
+  const Desktop = useMediaQuery("(min-width:43.75rem)");
+
   return (
     <FormControlLabel
       className="m-0"
@@ -22,12 +25,16 @@ const FormCheckbox = ({
           name={`subjects.${name}`}
           control={control}
           render={({ field: { value, ...field } }) => (
-            <Checkbox {...field} checked={!!value} />
+            <Checkbox
+              size={Desktop ? "medium" : "small"}
+              {...field}
+              checked={!!value}
+            />
           )}
         />
       }
       label={
-        <Typography className="self-end" variant="h5">
+        <Typography className="self-end" variant={Desktop ? "h5" : "subtitle1"}>
           {capitalize(name)}
         </Typography>
       }

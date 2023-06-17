@@ -8,6 +8,7 @@ import {
 } from "react-hook-form";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 type FormInputTextProps = {
   name: string;
@@ -26,6 +27,8 @@ const FormInputText = ({
   errors,
   multiline,
 }: FormInputTextProps) => {
+  const Desktop = useMediaQuery("(min-width:43.75rem)");
+
   return (
     <Grid item spacing={{ xs: 12 }}>
       <TextField
@@ -39,10 +42,13 @@ const FormInputText = ({
         multiline={multiline}
         rows={multiline ? 4 : 1}
         InputProps={{
-          style: { fontSize: "1.375rem" },
+          style: { fontSize: Desktop ? "1.375rem" : "0.875rem" },
         }}
         InputLabelProps={{
-          style: { fontSize: "1.5rem", color: "#3a54fb" },
+          style: {
+            fontSize: Desktop ? "1.5rem" : "1rem",
+            color: "#3a54fb",
+          },
         }}
         {...register(yupName)}
         error={errors ? true : false}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
@@ -10,6 +10,7 @@ import FormInputText from "./Form-Input-Text/FormInputText";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useForm, FieldValues } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -48,6 +49,8 @@ const defaultValues = {
 
 const ContactForm = (): JSX.Element => {
   const [isDisabled, setIsDisabled] = useState(false);
+  const Desktop = useMediaQuery("(min-width:43.75rem)");
+  const wrapSelects = useMediaQuery("(min-width:29.6875rem)");
 
   const {
     register,
@@ -110,57 +113,59 @@ const ContactForm = (): JSX.Element => {
       .join(" ");
   };
 
-  // useEffect(() => {
-  //   window.addEventListener(
-  //     "resize",
-  //     () => {
-  //       // const isMobileVisible = window.innerWidth < 1440;
-  //       // const smallerLogo = window.innerWidth < 600;
-  //       // if (isMobileVisible !== mobileVisible)
-  //       //   setMobileVisible(isMobileVisible);
-  //       // if (smallerLogo !== changeLogo) setChangeLogo(smallerLogo);
-  //     },
-  //     false
-  //   );
-  // }, []);
-  // sx={{ width: cardWidth }}
   return (
-    <Card elevation={8} className="bg-light-grey min-w-[32.75rem] ">
+    <Card elevation={8} className="bg-light-grey">
       <CardHeader
         className="w-full bg-regal-blue text-white"
         title={
           <Typography
             className="whitespace-wrap font-medium"
-            variant="h2"
+            variant={Desktop ? "h2" : "h4"}
             component="h1"
           >
             Contact Me
           </Typography>
         }
         subheader={
-          <Typography className="whitespace-wrap text-[1.5625rem]" variant="h6">
+          <Typography
+            className="whitespace-wrap"
+            variant={Desktop ? "h6" : "subtitle2"}
+          >
             To book a session please send me a message using this contact form
             <br /> and I will aim to respond within 3 - 5 working days
           </Typography>
         }
       />
       <CardContent>
-        <Grid className="flex-col" container spacing={3}>
+        <Grid className="flex flex-col" container spacing={3}>
           <Grid className="flex justify-evenly items-center m-0" item>
-            {["child age", "year group"].map((name) => {
-              let width = name === "child age" ? 165 : 175;
-              let yupName = name.replace(" ", "_");
-              return (
-                <FormSelect
-                  name={name}
-                  yupName={yupName}
-                  width={width}
-                  errors={errors[`${yupName}`]}
-                  control={control}
-                  capitalize={capitalize}
-                />
-              );
-            })}
+            <div
+              className={`flex flex-row flex-1 ${
+                wrapSelects ? "justify-evenly" : "flex-wrap justify-start"
+              }`}
+            >
+              {["child age", "year group"].map((name) => {
+                let width =
+                  name === "child age"
+                    ? Desktop
+                      ? "10.3125rem"
+                      : "8.3125rem"
+                    : Desktop
+                    ? "10.9375rem"
+                    : "8.9375rem";
+                let yupName = name.replace(" ", "_");
+                return (
+                  <FormSelect
+                    name={name}
+                    yupName={yupName}
+                    width={width}
+                    errors={errors[`${yupName}`]}
+                    control={control}
+                    capitalize={capitalize}
+                  />
+                );
+              })}
+            </div>
             <FormControl
               className="flex-col m-0"
               sx={{ m: 3 }}
@@ -169,7 +174,10 @@ const ContactForm = (): JSX.Element => {
               error={errors.subjects ? true : false}
             >
               <FormLabel
-                style={{ fontSize: "1.5625rem", color: "#3a54fb" }}
+                style={{
+                  fontSize: Desktop ? "1.5625rem" : "1.2625rem",
+                  color: "#3a54fb",
+                }}
                 className="w-full"
                 component="legend"
               >
@@ -210,7 +218,9 @@ const ContactForm = (): JSX.Element => {
           <Grid item spacing={{ xs: 8 }}>
             <Button
               variant="contained"
-              className="bg-regal-blue text-white text-[1.5625rem]"
+              className={`bg-regal-blue text-white text-[${
+                Desktop ? "1.5625rem" : "1.2625rem"
+              }]`}
               onClick={handleSubmit(sendEmail)}
               disabled={isDisabled}
               component={motion.div}

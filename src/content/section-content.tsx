@@ -142,7 +142,6 @@ const sectionContent = [
     id: "ethos",
     title: "My Ethos",
     content: (
-      // items-center
       <div className="flex flex-row">
         <motion.div
           initial="hidden"
@@ -151,15 +150,15 @@ const sectionContent = [
           viewport={{ once: false }}
           variants={{
             visible: { opacity: 1, x: 0 },
-            hidden: { opacity: 0, x: -150 },
+            hidden: { opacity: 0, x: -100 },
           }}
         >
           <div className="flex flex-col items-center flex-1 mr-auto">
-            <p>
-              <b>Create an enthusiastic learning environment</b>
+            <p className="ethos-text">
+              Create an enthusiastic learning environment
             </p>
             <img
-              className="w-48 mt-auto"
+              className="ethos-le-img"
               src={learningEnv}
               alt="learningEnvironment"
             />
@@ -172,15 +171,15 @@ const sectionContent = [
           viewport={{ once: false }}
           variants={{
             visible: { opacity: 1, y: 0 },
-            hidden: { opacity: 0, y: 150 },
+            hidden: { opacity: 0, y: 100 },
           }}
         >
           <div className="flex flex-col items-center justify-center flex-1 ">
-            <p>
-              <b>Nurture a strong student/teacher relationship</b>
+            <p className="ethos-text">
+              Nurture a strong student/teacher relationship
             </p>
             <img
-              className="w-64 mt-auto"
+              className="ethos-SnT-img"
               src={studentNTeacher}
               alt="StudentNTeacher"
             />
@@ -193,7 +192,7 @@ const sectionContent = [
           viewport={{ once: false }}
           variants={{
             visible: { opacity: 1, x: 0 },
-            hidden: { opacity: 0, x: 150 },
+            hidden: { opacity: 0, x: 100 },
           }}
         >
           <div className="flex flex-col items-center flex-1 ml-auto">
@@ -201,9 +200,9 @@ const sectionContent = [
               <b>Teach to maximise every child’s full potential</b>
             </p>
             <img
-              className="w-48 mt-auto"
+              className="ethos-potential-img"
               src={potential}
-              alt="learningEnvironment"
+              alt="potential"
             />
           </div>
         </motion.div>
@@ -252,21 +251,24 @@ const sectionContent = [
             <div className="pt-4 flex flex-row justify-evenly items-center">
               <motion.div variants={itemRight}>
                 <img
-                  className="w-96"
+                  className="recruitment-img"
                   src={teachingPersonnel}
                   alt="TeachingPersonnel"
                 />
               </motion.div>
               <motion.div variants={itemRight}>
-                <img className="w-96" src={smartTeachers} alt="SmartTeachers" />
+                <img
+                  className="recruitment-img"
+                  src={smartTeachers}
+                  alt="SmartTeachers"
+                />
               </motion.div>
               <motion.div variants={itemRight}>
-                <img className="w-96" src={CEPL} alt="CEPL" />
+                <img className="recruitment-img" src={CEPL} alt="CEPL" />
               </motion.div>
             </div>
           </motion.div>
         </>
-        {/* className="w-26" */}
         <>
           <br />
           <p>Also proficient in a number of learning platforms:</p>
@@ -285,17 +287,21 @@ const sectionContent = [
           >
             <div className="flex flex-row justify-evenly items-center">
               <motion.div variants={itemLeft}>
-                <img className="w-24" src={zoom} alt="zoom" />
-              </motion.div>
-              <motion.div variants={itemLeft}>
-                <img className="w-24" src={powerpoint} alt="powerpoint" />
-              </motion.div>
-              <motion.div variants={itemLeft}>
-                <img className="w-60" src={bramble} alt="bramble" />
+                <img className="zoomNPp-imgs" src={zoom} alt="zoom" />
               </motion.div>
               <motion.div variants={itemLeft}>
                 <img
-                  className="w-40"
+                  className="zoomNPp-imgs"
+                  src={powerpoint}
+                  alt="powerpoint"
+                />
+              </motion.div>
+              <motion.div variants={itemLeft}>
+                <img className="bramble-img" src={bramble} alt="bramble" />
+              </motion.div>
+              <motion.div variants={itemLeft}>
+                <img
+                  className="googleC-img"
                   src={googleClassroom}
                   alt="googleClassroom"
                 />

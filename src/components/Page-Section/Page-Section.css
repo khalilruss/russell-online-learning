@@ -5,19 +5,102 @@
 }
 
 .section-title {
-  font-size: 3.125rem;
   font-weight: bold;
   margin: 3.125rem auto auto;
   color: #3a54fb;
 }
 
 .section-content {
-  font-size: 1.5625rem;
-  width: 65%;
   margin: 1.5625rem auto 3.125rem;
   line-height: 1.8;
 }
 
 .section-coloured-bg {
   background-color: #e7edfa;
+}
+
+.ethos-text {
+  font-weight: bolder;
+}
+
+.ethos-le-img {
+  margin-top: auto;
+}
+.ethos-SnT-img {
+  margin-top: auto;
+}
+.ethos-potential-img {
+  margin-top: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (min-width: 700px) {
+  .section-title {
+    font-size: 3.125rem;
+  }
+
+  .section-content {
+    width: 65%;
+    font-size: 1.5625rem;
+  }
+  .ethos-text {
+    font-size: 1.5625rem;
+  }
+  .ethos-le-img {
+    width: 12rem;
+  }
+  .ethos-SnT-img {
+    width: 16rem;
+  }
+  .ethos-potential-img {
+    width: 12rem;
+  }
+  .recruitment-img {
+    width: 24rem;
+  }
+  .zoomNPp-imgs {
+    width: 6rem;
+  }
+  .bramble-img {
+    width: 15rem;
+  }
+  .googleC-img {
+    width: 10rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .section-title {
+    font-size: 2.125rem;
+  }
+
+  .section-content {
+    width: 90%;
+    font-size: 0.8rem;
+  }
+  .ethos-text {
+    font-size: 0.8rem;
+  }
+  .ethos-le-img {
+    width: 6rem;
+  }
+  .ethos-SnT-img {
+    width: 8rem;
+  }
+  .ethos-potential-img {
+    width: 6rem;
+  }
+  .recruitment-img {
+    width: 14rem;
+  }
+  .zoomNPp-imgs {
+    width: 3rem;
+  }
+  .bramble-img {
+    width: 11rem;
+  }
+  .googleC-img {
+    width: 7rem;
+  }
 }

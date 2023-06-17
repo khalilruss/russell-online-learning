@@ -20,12 +20,10 @@
 .welcome-title {
   color: white;
   text-align: center;
-  font-size: 5.5rem;
   margin: auto;
 }
 .welcome-text {
   color: white;
-  font-size: 2.5rem;
   margin: 1.25rem;
 }
 
@@ -35,4 +33,22 @@
   align-items: center;
   padding-top: 24.9375rem;
   padding-bottom: 20.9375rem;
+}
+
+@media screen and (min-width: 43.75rem) {
+  .welcome-title {
+    font-size: 5.5rem;
+  }
+  .welcome-text {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 43.75rem) {
+  .welcome-title {
+    font-size: 3.5rem;
+  }
+  .welcome-text {
+    font-size: 1.5rem;
+  }
 }

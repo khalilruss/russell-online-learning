@@ -2,6 +2,7 @@ import InputLabel from "@mui/material/InputLabel";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 import {
   Control,
@@ -18,7 +19,7 @@ type FormSelectProps = {
   name: string;
   yupName: string;
   control: Control<FieldValues, any>;
-  width: number;
+  width: string;
   errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   capitalize: (str: string) => string;
 };
@@ -31,12 +32,14 @@ const FormSelect = ({
   errors,
   capitalize,
 }: FormSelectProps): JSX.Element => {
+  const Desktop = useMediaQuery("(min-width:43.75rem)");
+
   const displaySelectItem = (type: "child age" | "year group") => {
     return Array(5)
       .fill(0)
       .map((_, i) => (
         <MenuItem
-          style={{ fontSize: "1.25rem" }}
+          style={{ fontSize: Desktop ? "1.25rem" : "0.75rem" }}
           value={type === "child age" ? i + 6 : `Year ${i + 2}`}
         >
           {type === "child age" ? i + 6 : `Year ${i + 2}`}
@@ -46,13 +49,12 @@ const FormSelect = ({
 
   return (
     <div>
-      <FormControl
-        className="flex w-fit"
-        required
-        sx={{ m: 1, minWidth: width }}
-      >
+      <FormControl className="flex w-fit" required sx={{ minWidth: width }}>
         <InputLabel
-          style={{ fontSize: "1.375rem", color: "#3a54fb" }}
+          style={{
+            fontSize: Desktop ? "1.375rem" : "0.975rem",
+            color: "#3a54fb",
+          }}
           id={`${yupName}-label`}
         >
           {capitalize(name)}
@@ -69,7 +71,7 @@ const FormSelect = ({
               label={capitalize(name)}
               input={
                 <OutlinedInput
-                  sx={{ fontSize: "1.25rem" }}
+                  sx={{ fontSize: Desktop ? "1.25rem" : "0.75rem" }}
                   label={capitalize(name)}
                 />
               }

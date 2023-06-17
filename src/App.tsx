@@ -6,8 +6,10 @@ import ContactForm from "./components/Contact-Form/ContactForm";
 import studyImg from "./assets/educacion_compensatoria_pequena.jpg";
 import childrenImg from "./assets/school-children.webp";
 import { motion } from "framer-motion";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const App = (): JSX.Element => {
+  const Desktop = useMediaQuery("(min-width:43.75rem)");
   const displayContent = (): JSX.Element[] => {
     return content.slice(1).map((section, index) => {
       return (
@@ -16,7 +18,9 @@ const App = (): JSX.Element => {
           id={section.id}
           title={section.title}
           colouredBg={index % 2 === 0 ? false : true}
-          contentClassName={section.id === "ethos" ? "w-3/4" : ""}
+          contentClassName={
+            section.id === "ethos" ? (Desktop ? "w-3/4" : "") : ""
+          }
         >
           {section.content}
         </PageSection>

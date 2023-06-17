@@ -41,9 +41,13 @@ const Header = (): JSX.Element => {
 
   const [drawerVisible, setDrawerVisible] = useState<Boolean>(false);
 
-  const [mobileVisible, setMobileVisible] = useState<Boolean>(false);
+  const [mobileVisible, setMobileVisible] = useState<Boolean>(
+    window.innerWidth < 600
+  );
 
-  const [changeLogo, setChangeLogo] = useState<Boolean>(false);
+  const [changeLogo, setChangeLogo] = useState<Boolean>(
+    window.innerWidth < 600
+  );
 
   useEffect(() => {
     window.addEventListener(

@@ -60,7 +60,7 @@ const App = (): JSX.Element => {
         style={{
           backgroundImage: `url(${studyImg})`,
         }}
-        className="page-section p-8 background-image"
+        className="page-section p-8 background-image overflow-hidden"
       >
         <motion.div
           initial="hidden"

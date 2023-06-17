@@ -15,14 +15,6 @@ import learningEnv from "../assets/learning-environment.png";
 import potential from "../assets/potential.png";
 import { motion } from "framer-motion";
 
-// const container = {
-//   visible: {
-//     transition: {
-//       staggerChildren: 0.2,
-//     },
-//   },
-// };
-
 const itemRight = {
   hidden: {
     opacity: 0,
@@ -99,7 +91,7 @@ const displayAccordions = (): JSX.Element[] => {
         >
           {accordion.summary}
         </AccordionSummary>
-        <AccordionDetails className="bg-light-grey">
+        <AccordionDetails className="bg-slate-50">
           {accordion.details}
         </AccordionDetails>
       </Accordion>
@@ -213,7 +205,7 @@ const sectionContent = [
     id: "aboutMe",
     title: "About Me",
     content: (
-      <div>
+      <div className=" overflow-hidden">
         <p>
           My name is Veronica Russell, a primary school teacher with 9 years'
           experience working with children of differing abilities in inner

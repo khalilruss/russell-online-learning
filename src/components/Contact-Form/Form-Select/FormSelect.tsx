@@ -33,6 +33,7 @@ const FormSelect = ({
   capitalize,
 }: FormSelectProps): JSX.Element => {
   const Desktop = useMediaQuery("(min-width:43.75rem)");
+  const wrapSelects = useMediaQuery("(min-width:29.6875rem)");
 
   const displaySelectItem = (type: "child age" | "year group") => {
     return Array(5)
@@ -48,8 +49,14 @@ const FormSelect = ({
   };
 
   return (
-    <div>
-      <FormControl className="flex w-fit" required sx={{ minWidth: width }}>
+    <>
+      <FormControl
+        className={`flex w-fit ${
+          name === "child age" ? (wrapSelects ? "" : "pb-3") : ""
+        }`}
+        required
+        sx={{ minWidth: width }}
+      >
         <InputLabel
           style={{
             fontSize: Desktop ? "1.375rem" : "0.975rem",
@@ -71,7 +78,9 @@ const FormSelect = ({
               label={capitalize(name)}
               input={
                 <OutlinedInput
-                  sx={{ fontSize: Desktop ? "1.25rem" : "0.75rem" }}
+                  sx={{
+                    fontSize: Desktop ? "1.25rem" : "0.75rem",
+                  }}
                   label={capitalize(name)}
                 />
               }
@@ -87,7 +96,7 @@ const FormSelect = ({
       <Typography variant="inherit" color="textSecondary">
         {errors?.message?.toString()}
       </Typography>
-    </div>
+    </>
   );
 };
 

@@ -114,7 +114,10 @@ const ContactForm = (): JSX.Element => {
   };
 
   return (
-    <Card elevation={8} className="bg-light-grey">
+    <Card
+      elevation={8}
+      className={`bg-light-grey ${wrapSelects ? "" : "w-screen"}`}
+    >
       <CardHeader
         className="w-full bg-regal-blue text-white"
         title={
@@ -141,7 +144,7 @@ const ContactForm = (): JSX.Element => {
           <Grid className="flex justify-evenly items-center m-0" item>
             <div
               className={`flex flex-row flex-1 ${
-                wrapSelects ? "justify-evenly" : "flex-wrap justify-start"
+                wrapSelects ? "justify-evenly" : "flex-wrap justify-center"
               }`}
             >
               {["child age", "year group"].map((name) => {
@@ -151,8 +154,8 @@ const ContactForm = (): JSX.Element => {
                       ? "10.3125rem"
                       : "8.3125rem"
                     : Desktop
-                    ? "10.9375rem"
-                    : "8.9375rem";
+                    ? "10.3125rem"
+                    : "8.3125rem";
                 let yupName = name.replace(" ", "_");
                 return (
                   <FormSelect

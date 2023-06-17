@@ -1,4 +1,4 @@
-import { useEffect, useState, MouseEvent } from "react";
+import { useState, MouseEvent } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -12,6 +12,7 @@ import HeaderMenu from "./Header-Menu/Header-Menu";
 import { headerButtons, aboutMenuItems } from "../../content/header-content";
 import HeaderDrawer from "./Header-Drawer/HeaderDrawer";
 import { motion } from "framer-motion";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
@@ -38,30 +39,11 @@ const theme = createTheme({
 const Header = (): JSX.Element => {
   const [anchorElAboutMenu, setAnchorElAboutMenu] =
     useState<null | HTMLElement>(null);
+  const smallScreen = useMediaQuery("(max-width:90rem)");
+  const changeLogo = useMediaQuery("(min-width:37.5rem)");
+  const smallMobile = useMediaQuery("(max-width:19.6875rem)");
 
   const [drawerVisible, setDrawerVisible] = useState<Boolean>(false);
-
-  const [mobileVisible, setMobileVisible] = useState<Boolean>(
-    window.innerWidth < 600
-  );
-
-  const [changeLogo, setChangeLogo] = useState<Boolean>(
-    window.innerWidth < 600
-  );
-
-  useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => {
-        const isMobileVisible = window.innerWidth < 1440;
-        const smallerLogo = window.innerWidth < 600;
-        if (isMobileVisible !== mobileVisible)
-          setMobileVisible(isMobileVisible);
-        if (smallerLogo !== changeLogo) setChangeLogo(smallerLogo);
-      },
-      false
-    );
-  }, [mobileVisible, changeLogo]);
 
   const handleClickMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElAboutMenu(event.currentTarget);
@@ -104,7 +86,11 @@ const Header = (): JSX.Element => {
           <ThemeProvider theme={theme}>
             <Link
               className={`text-lg font-medium self-center ${
-                mobileVisible ? " relative left-[1.5rem] grow" : " m-2 "
+                smallScreen
+                  ? smallMobile
+                    ? " m-2 "
+                    : " relative left-[1.5rem] grow"
+                  : "m-2"
               }`}
               activeClass="active"
               type="submit"
@@ -119,8 +105,7 @@ const Header = (): JSX.Element => {
               >
                 <Typography
                   className="whitespace-nowrap font-medium"
-                  variant="h4"
-                  // component="h1"
+                  variant={changeLogo ? "h4" : "h6"}
                   component={motion.h1}
                   whileHover={{
                     scale: 1.05,
@@ -128,7 +113,7 @@ const Header = (): JSX.Element => {
                   }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  {changeLogo ? "ROL" : "Russell Online Learning"}
+                  Russell Online Learning
                 </Typography>
               </motion.div>
             </Link>

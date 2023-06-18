@@ -39,11 +39,6 @@
   .welcome-text {
     font-size: 2.5rem;
   }
-
-  .welcome-section {
-    padding-top: 24.9375rem;
-    padding-bottom: 20.9375rem;
-  }
 }
 
 @media screen and (max-width: 43.75rem) {
@@ -52,9 +47,5 @@
   }
   .welcome-text {
     font-size: 1.5rem;
-  }
-  .welcome-section {
-    padding-top: 17.9375rem;
-    padding-bottom: 13.9375rem;
   }
 }

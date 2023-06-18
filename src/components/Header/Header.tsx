@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, forwardRef } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -16,7 +16,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 declare module "@mui/material/styles" {
   interface BreakpointOverrides {
-    xs: false; // removes the `xs` breakpoint
+    xs: false;
     sm: false;
     md: false;
     lg: false;
@@ -36,7 +36,7 @@ const theme = createTheme({
   },
 });
 
-const Header = (): JSX.Element => {
+const Header = forwardRef<HTMLInputElement>((_, ref): JSX.Element => {
   const [anchorElAboutMenu, setAnchorElAboutMenu] =
     useState<null | HTMLElement>(null);
   const smallScreen = useMediaQuery("(max-width:90rem)");
@@ -81,7 +81,7 @@ const Header = (): JSX.Element => {
 
   return (
     <header>
-      <AppBar className="bg-regal-blue flex">
+      <AppBar className="bg-regal-blue flex" ref={ref}>
         <Toolbar disableGutters className="flex justify-between">
           <ThemeProvider theme={theme}>
             <Link
@@ -170,6 +170,6 @@ const Header = (): JSX.Element => {
       </AppBar>
     </header>
   );
-};
+});
 
 export default Header;

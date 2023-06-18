@@ -30,7 +30,7 @@ const FormInputText = ({
   const Desktop = useMediaQuery("(min-width:43.75rem)");
 
   return (
-    <Grid item spacing={{ xs: 12 }}>
+    <Grid item>
       <TextField
         className=" text-white bg-white"
         placeholder={`Enter your ${name}`}

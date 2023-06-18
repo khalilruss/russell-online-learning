@@ -44,7 +44,12 @@ const itemLeft = {
 };
 
 const displayAccordions = (): JSX.Element[] => {
-  const accordionAccomplisments = [
+  type AccordionAccomplisment = {
+    summary: string;
+    details: string;
+  };
+
+  const accordionAccomplisments: AccordionAccomplisment[] = [
     {
       summary:
         "PSHE (Personal, Social, Health and Economic education) Co-ordinator",
@@ -78,7 +83,7 @@ const displayAccordions = (): JSX.Element[] => {
 
   return accordionAccomplisments.map((accordion, index) => {
     return (
-      <Accordion disableGutters={true} className="shadow-none">
+      <Accordion key={index} disableGutters={true} className="shadow-none">
         <AccordionSummary
           className="bg-regal-blue text-white"
           expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
@@ -99,7 +104,13 @@ const displayAccordions = (): JSX.Element[] => {
   });
 };
 
-const sectionContent = [
+type SectionContent = {
+  id: string;
+  title: string;
+  content: JSX.Element;
+};
+
+const sectionContent: SectionContent[] = [
   {
     id: "welcome",
     title: "Welcome to Russell Online Learning",

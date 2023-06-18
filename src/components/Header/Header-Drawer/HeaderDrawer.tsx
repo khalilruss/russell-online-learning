@@ -31,6 +31,7 @@ const HeaderDrawer = ({
   ): JSX.Element => {
     return (
       <ListItemButton
+        key={index}
         onClick={(event) => {
           propagateClick(event);
           toggleDrawer(false);

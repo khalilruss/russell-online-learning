@@ -2,12 +2,12 @@ import { MouseEvent } from "react";
 import Button from "@mui/material/Button";
 import { Link } from "react-scroll";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { HeaderMenuItem } from "../Header-Menu/Header-Menu";
+import { HeaderItem } from "../../../content/header-content";
 import { motion } from "framer-motion";
 
 type HeaderButtonProps = {
   index: number;
-  id: string | HeaderMenuItem[];
+  id: string | HeaderItem[];
   label: string;
   handleClickAboutMenu: (event: MouseEvent<HTMLElement>) => void;
   propagateClick: (event: MouseEvent<HTMLElement>) => void;

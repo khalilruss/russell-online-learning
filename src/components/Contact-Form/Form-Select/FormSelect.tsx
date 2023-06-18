@@ -40,6 +40,7 @@ const FormSelect = ({
       .fill(0)
       .map((_, i) => (
         <MenuItem
+          key={type === "child age" ? i + 6 : `Year ${i + 2}`}
           style={{ fontSize: Desktop ? "1.25rem" : "0.75rem" }}
           value={type === "child age" ? i + 6 : `Year ${i + 2}`}
         >

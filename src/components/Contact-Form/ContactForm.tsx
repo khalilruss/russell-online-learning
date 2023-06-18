@@ -159,6 +159,7 @@ const ContactForm = (): JSX.Element => {
                 let yupName = name.replace(" ", "_");
                 return (
                   <FormSelect
+                    key={name}
                     name={name}
                     yupName={yupName}
                     width={width}
@@ -190,6 +191,7 @@ const ContactForm = (): JSX.Element => {
                 {["maths", "english"].map((subject) => {
                   return (
                     <FormCheckbox
+                      key={subject}
                       name={subject}
                       control={control}
                       capitalize={capitalize}
@@ -209,6 +211,7 @@ const ContactForm = (): JSX.Element => {
                 : field;
             return (
               <FormInputText
+                key={field}
                 name={field}
                 yupName={yupName}
                 label={capitalize(field)}
@@ -218,12 +221,13 @@ const ContactForm = (): JSX.Element => {
               />
             );
           })}
-          <Grid item spacing={{ xs: 8 }}>
+          <Grid item>
             <Button
               variant="contained"
-              className={`bg-regal-blue text-white text-[${
-                Desktop ? "1.5625rem" : "1.2625rem"
-              }]`}
+              className={`bg-regal-blue text-white ${
+                Desktop ? "text-2xl" : "text-l"
+              }`}
+              size="large"
               onClick={handleSubmit(sendEmail)}
               disabled={isDisabled}
               component={motion.div}

@@ -1,4 +1,9 @@
-export const aboutMenuItems = [
+export type HeaderItem = {
+  id: string | HeaderItem[];
+  label: string;
+};
+
+export const aboutMenuItems: HeaderItem[] = [
   {
     label: "About Russell Online Learning",
     id: "aboutROL",
@@ -9,7 +14,7 @@ export const aboutMenuItems = [
   },
 ];
 
-export const headerButtons = [
+export const headerButtons: HeaderItem[] = [
   {
     label: "About",
     id: aboutMenuItems,

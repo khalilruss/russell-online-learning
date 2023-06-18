@@ -67,6 +67,7 @@ const Header = forwardRef<HTMLInputElement>((_, ref): JSX.Element => {
     return headerButtons.map((item, index) => {
       return (
         <HeaderButton
+          key={index}
           index={index}
           id={item.id}
           label={item.label}

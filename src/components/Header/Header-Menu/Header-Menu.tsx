@@ -2,18 +2,14 @@ import { MouseEvent } from "react";
 import { Link } from "react-scroll";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { HeaderItem } from "../../../content/header-content";
 
 type HeaderMenuProps = {
   id: string;
   anchorEl: null | HTMLElement;
-  menuItems: HeaderMenuItem[];
+  menuItems: HeaderItem[];
   handleCloseMenu: () => void;
   propagateClick: (event: MouseEvent<HTMLElement>) => void;
-};
-
-export type HeaderMenuItem = {
-  id: string | HeaderMenuItem[];
-  label: string;
 };
 
 const HeaderMenu = ({
@@ -23,10 +19,7 @@ const HeaderMenu = ({
   handleCloseMenu,
   propagateClick,
 }: HeaderMenuProps): JSX.Element => {
-  const displayMenuItem = (
-    item: HeaderMenuItem,
-    index: number
-  ): JSX.Element => {
+  const displayMenuItem = (item: HeaderItem, index: number): JSX.Element => {
     return (
       <MenuItem
         key={index}
@@ -57,7 +50,7 @@ const HeaderMenu = ({
     >
       {menuItems.map((item, index) =>
         item.label === "About"
-          ? (item.id as HeaderMenuItem[]).map((item, index) =>
+          ? (item.id as HeaderItem[]).map((item, index) =>
               displayMenuItem(item, index)
             )
           : displayMenuItem(item, index)

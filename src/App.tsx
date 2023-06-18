@@ -59,7 +59,7 @@ const App = (): JSX.Element => {
     return () => {
       window.removeEventListener("resize", handleWindowResize);
     };
-  }, []);
+  }, [paddingBottom]);
 
   return (
     <div className="App">

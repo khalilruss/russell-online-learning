@@ -2,7 +2,7 @@ import React from "react";
 import "./Page-Section.css";
 import { motion } from "framer-motion";
 
-type PageSectionProps = {
+export type PageSectionProps = {
   id: string;
   title: string;
   colouredBg: boolean;
@@ -30,9 +30,17 @@ const PageSection = ({
         className={`page-section ${
           colouredBg ? "bg-light-grey" : ""
         } ${className}`}
+        data-testid={id}
       >
-        <h2 className="section-title">{title}</h2>
-        <div className={`section-content ${contentClassName}`}>{children}</div>
+        <h2 className="section-title" data-testid="section-title">
+          {title}
+        </h2>
+        <div
+          className={`section-content ${contentClassName}`}
+          data-testid="section-content"
+        >
+          {children}
+        </div>
       </div>
     </motion.div>
   );

@@ -5,7 +5,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { HeaderItem } from "../../../content/header-content";
 import { motion } from "framer-motion";
 
-type HeaderButtonProps = {
+export type HeaderButtonProps = {
   index: number;
   id: string | HeaderItem[];
   label: string;
@@ -21,10 +21,12 @@ const HeaderButton = ({
   propagateClick,
 }: HeaderButtonProps): JSX.Element => {
   return (
-    <div>
+    <>
       <Button
+        data-testid={`header-button-${index}`}
         key={index}
         endIcon={label === "About" ? <KeyboardArrowDownIcon /> : null}
+        classes={{ endIcon: "self-start" }}
         component={motion.div}
         whileHover={{
           scale: 1.1,
@@ -53,7 +55,7 @@ const HeaderButton = ({
           </Link>
         )}
       </Button>
-    </div>
+    </>
   );
 };
 

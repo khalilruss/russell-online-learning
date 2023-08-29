@@ -142,77 +142,6 @@ const sectionContent: SectionContent[] = [
     ),
   },
   {
-    id: "ethos",
-    title: "My Ethos",
-    content: (
-      <div className="flex flex-row overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          transition={{ ease: "easeIn", duration: 0.4 }}
-          viewport={{ once: false }}
-          variants={{
-            visible: { opacity: 1, x: 0 },
-            hidden: { opacity: 0, x: -100 },
-          }}
-        >
-          <div className="flex flex-col items-center flex-1 mr-auto">
-            <p className="ethos-text">
-              Create an enthusiastic learning environment
-            </p>
-            <img
-              className="ethos-le-img"
-              src={learningEnv}
-              alt="learningEnvironment"
-            />
-          </div>
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          transition={{ ease: "easeIn", duration: 0.3 }}
-          viewport={{ once: false }}
-          variants={{
-            visible: { opacity: 1, y: 0 },
-            hidden: { opacity: 0, y: 100 },
-          }}
-        >
-          <div className="flex flex-col items-center justify-center flex-1 ">
-            <p className="ethos-text">
-              Nurture a strong student/teacher relationship
-            </p>
-            <img
-              className="ethos-SnT-img"
-              src={studentNTeacher}
-              alt="StudentNTeacher"
-            />
-          </div>
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          transition={{ ease: "easeIn", duration: 0.3 }}
-          viewport={{ once: false }}
-          variants={{
-            visible: { opacity: 1, x: 0 },
-            hidden: { opacity: 0, x: 100 },
-          }}
-        >
-          <div className="flex flex-col items-center flex-1 ml-auto">
-            <p>
-              <b>Teach to maximise every child’s full potential</b>
-            </p>
-            <img
-              className="ethos-potential-img"
-              src={potential}
-              alt="potential"
-            />
-          </div>
-        </motion.div>
-      </div>
-    ),
-  },
-  {
     id: "aboutMe",
     title: "About Me",
     content: (
@@ -312,6 +241,77 @@ const sectionContent: SectionContent[] = [
             </div>
           </motion.div>
         </>
+      </div>
+    ),
+  },
+  {
+    id: "ethos",
+    title: "My Ethos",
+    content: (
+      <div className="flex flex-row overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.4 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, x: 0 },
+            hidden: { opacity: 0, x: -100 },
+          }}
+        >
+          <div className="flex flex-col items-center flex-1 mr-auto">
+            <p className="ethos-text">
+              Create an enthusiastic learning environment
+            </p>
+            <img
+              className="ethos-le-img"
+              src={learningEnv}
+              alt="learningEnvironment"
+            />
+          </div>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.3 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, y: 0 },
+            hidden: { opacity: 0, y: 100 },
+          }}
+        >
+          <div className="flex flex-col items-center justify-center flex-1 ">
+            <p className="ethos-text">
+              Nurture a strong student/teacher relationship
+            </p>
+            <img
+              className="ethos-SnT-img"
+              src={studentNTeacher}
+              alt="StudentNTeacher"
+            />
+          </div>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          transition={{ ease: "easeIn", duration: 0.3 }}
+          viewport={{ once: false }}
+          variants={{
+            visible: { opacity: 1, x: 0 },
+            hidden: { opacity: 0, x: 100 },
+          }}
+        >
+          <div className="flex flex-col items-center flex-1 ml-auto">
+            <p>
+              <b>Teach to maximise every child’s full potential</b>
+            </p>
+            <img
+              className="ethos-potential-img"
+              src={potential}
+              alt="potential"
+            />
+          </div>
+        </motion.div>
       </div>
     ),
   },

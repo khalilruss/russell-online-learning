@@ -8,9 +8,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import HeaderButton from "./Header-Button/Header-Button";
-import HeaderMenu from "./Header-Menu/Header-Menu";
+import HeaderMenu from "./Header-Dropdown/Header-Dropdown";
 import { headerButtons, aboutMenuItems } from "../../content/header-content";
-import HeaderDrawer from "./Header-Drawer/HeaderDrawer";
+import HeaderDrawer from "./Header-Drawer/Header-Drawer";
 import { motion } from "framer-motion";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -82,10 +82,11 @@ const Header = forwardRef<HTMLInputElement>((_, ref): JSX.Element => {
 
   return (
     <header>
-      <AppBar className="bg-regal-blue flex" ref={ref}>
+      <AppBar data-testid="header" className="bg-regal-blue flex" ref={ref}>
         <Toolbar disableGutters className="flex justify-between">
           <ThemeProvider theme={theme}>
             <Link
+              data-testid="logo"
               className={`text-lg font-medium self-center ${
                 smallScreen
                   ? smallMobile
@@ -141,6 +142,7 @@ const Header = forwardRef<HTMLInputElement>((_, ref): JSX.Element => {
               </Box>
             </motion.div>
             <Box
+              data-testid="header-drawer-button"
               sx={{
                 flexGrow: 0,
                 display: { xs: "flex", xl: "none" },
@@ -148,7 +150,6 @@ const Header = forwardRef<HTMLInputElement>((_, ref): JSX.Element => {
             >
               <IconButton
                 size="large"
-                aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={() => {
@@ -159,7 +160,7 @@ const Header = forwardRef<HTMLInputElement>((_, ref): JSX.Element => {
                 <MenuIcon />
               </IconButton>
               <HeaderDrawer
-                id="header-menu"
+                id="header-drawer"
                 menuItems={headerButtons}
                 drawerVisible={Boolean(drawerVisible)}
                 toggleDrawer={toggleDrawer}

@@ -30,7 +30,7 @@ const PageSection = ({
         className={`page-section ${
           colouredBg ? "bg-light-grey" : ""
         } ${className}`}
-        data-testid={id}
+        data-testid="page-section"
       >
         <h2 className="section-title" data-testid="section-title">
           {title}

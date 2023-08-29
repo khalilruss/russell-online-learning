@@ -55,6 +55,8 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0"
+    "@testing-library/react": "^13.4.0",
+    "@types/css-mediaquery": "^0.1.1",
+    "css-mediaquery": "^0.1.2"
   }
 }

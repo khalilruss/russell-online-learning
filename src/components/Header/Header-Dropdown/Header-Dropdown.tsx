@@ -1,10 +1,9 @@
 import { MouseEvent } from "react";
-import { Link } from "react-scroll";
 import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
 import { HeaderItem } from "../../../content/header-content";
+import HeaderDropdownItem from "./Header-Dropdown-Item/Header-Dropdown-Item";
 
-type HeaderMenuProps = {
+export type HeaderDropdownProps = {
   id: string;
   anchorEl: null | HTMLElement;
   menuItems: HeaderItem[];
@@ -12,36 +11,28 @@ type HeaderMenuProps = {
   propagateClick: (event: MouseEvent<HTMLElement>) => void;
 };
 
-const HeaderMenu = ({
+const HeaderDropdown = ({
   anchorEl,
   id,
   menuItems,
   handleCloseMenu,
   propagateClick,
-}: HeaderMenuProps): JSX.Element => {
+}: HeaderDropdownProps): JSX.Element => {
   const displayMenuItem = (item: HeaderItem, index: number): JSX.Element => {
     return (
-      <MenuItem
+      <HeaderDropdownItem
         key={index}
-        onClick={(event) => {
-          propagateClick(event);
-        }}
-      >
-        <Link
-          className="text-lg font-medium"
-          type="submit"
-          to={item.id as string}
-          smooth={true}
-          offset={-40}
-        >
-          {item.label}
-        </Link>
-      </MenuItem>
+        index={index}
+        id={item.id}
+        label={item.label}
+        propagateClick={propagateClick}
+      />
     );
   };
 
   return (
     <Menu
+      data-testid="header-dropdown"
       id={id}
       anchorEl={anchorEl}
       open={Boolean(anchorEl)}
@@ -59,4 +50,4 @@ const HeaderMenu = ({
   );
 };
 
-export default HeaderMenu;
+export default HeaderDropdown;

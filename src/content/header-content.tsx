@@ -20,10 +20,6 @@ export const headerButtons: HeaderItem[] = [
     id: aboutMenuItems,
   },
   {
-    label: "My Ethos",
-    id: "ethos",
-  },
-  {
     label: "My Accomplishments",
     id: "accomplishments",
   },

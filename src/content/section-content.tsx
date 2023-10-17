@@ -124,21 +124,92 @@ const sectionContent: SectionContent[] = [
     id: "aboutROL",
     title: "About Russell Online Learning",
     content: (
-      <div>
-        <p>
-          Has the Covid pandemic left your child behind in their academic
-          learning? Are you disappointed with their end of year report? Do you
-          need support in helping them to catch up on their missed learning?
+      <>
+        <div>
+          <p>
+            Has the Covid pandemic left your child behind in their academic
+            learning? Are you disappointed with their end of year report? Do you
+            need support in helping them to catch up on their missed learning?
+            <br />
+            Get expert support and effective teaching from Russell Online
+            Learning!
+          </p>
+          <p>
+            I offer tailor-made online lessons focusing on Maths and English, to
+            provide intensive support for children that need to catch up on
+            their missed learning.
+          </p>
+        </div>
+        <>
           <br />
-          Get expert support and effective teaching from Russell Online
-          Learning!
-        </p>
-        <p>
-          I offer tailor-made online lessons focusing on Maths and English, to
-          provide intensive support for children that need to catch up on their
-          missed learning.
-        </p>
-      </div>
+          <p className="font-bold">The Russell Online Learning ethos is: </p>
+          <div className="pt-4 flex flex-row overflow-hidden">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ease: "easeIn", duration: 0.4 }}
+              viewport={{ once: false }}
+              variants={{
+                visible: { opacity: 1, x: 0 },
+                hidden: { opacity: 0, x: -100 },
+              }}
+            >
+              <div className="flex flex-col items-center flex-1 mr-auto">
+                <p className="ethos-text">
+                  Create an enthusiastic learning environment
+                </p>
+                <img
+                  className="ethos-le-img"
+                  src={learningEnv}
+                  alt="learningEnvironment"
+                />
+              </div>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ease: "easeIn", duration: 0.3 }}
+              viewport={{ once: false }}
+              variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 100 },
+              }}
+            >
+              <div className="flex flex-col items-center justify-center flex-1 ">
+                <p className="ethos-text">
+                  Nurture a strong student/teacher relationship
+                </p>
+                <img
+                  className="ethos-SnT-img"
+                  src={studentNTeacher}
+                  alt="StudentNTeacher"
+                />
+              </div>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ease: "easeIn", duration: 0.3 }}
+              viewport={{ once: false }}
+              variants={{
+                visible: { opacity: 1, x: 0 },
+                hidden: { opacity: 0, x: 100 },
+              }}
+            >
+              <div className="flex flex-col items-center flex-1 ml-auto">
+                <p>
+                  <b>Teach to maximise every child’s full potential</b>
+                </p>
+                <img
+                  className="ethos-potential-img"
+                  src={potential}
+                  alt="potential"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </>
+      </>
     ),
   },
   {
@@ -245,77 +316,6 @@ const sectionContent: SectionContent[] = [
     ),
   },
   {
-    id: "ethos",
-    title: "My Ethos",
-    content: (
-      <div className="flex flex-row overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          transition={{ ease: "easeIn", duration: 0.4 }}
-          viewport={{ once: false }}
-          variants={{
-            visible: { opacity: 1, x: 0 },
-            hidden: { opacity: 0, x: -100 },
-          }}
-        >
-          <div className="flex flex-col items-center flex-1 mr-auto">
-            <p className="ethos-text">
-              Create an enthusiastic learning environment
-            </p>
-            <img
-              className="ethos-le-img"
-              src={learningEnv}
-              alt="learningEnvironment"
-            />
-          </div>
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          transition={{ ease: "easeIn", duration: 0.3 }}
-          viewport={{ once: false }}
-          variants={{
-            visible: { opacity: 1, y: 0 },
-            hidden: { opacity: 0, y: 100 },
-          }}
-        >
-          <div className="flex flex-col items-center justify-center flex-1 ">
-            <p className="ethos-text">
-              Nurture a strong student/teacher relationship
-            </p>
-            <img
-              className="ethos-SnT-img"
-              src={studentNTeacher}
-              alt="StudentNTeacher"
-            />
-          </div>
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          transition={{ ease: "easeIn", duration: 0.3 }}
-          viewport={{ once: false }}
-          variants={{
-            visible: { opacity: 1, x: 0 },
-            hidden: { opacity: 0, x: 100 },
-          }}
-        >
-          <div className="flex flex-col items-center flex-1 ml-auto">
-            <p>
-              <b>Teach to maximise every child’s full potential</b>
-            </p>
-            <img
-              className="ethos-potential-img"
-              src={potential}
-              alt="potential"
-            />
-          </div>
-        </motion.div>
-      </div>
-    ),
-  },
-  {
     id: "accomplishments",
     title: "My Accomplishments",
     content: (
@@ -358,7 +358,7 @@ const sectionContent: SectionContent[] = [
           teaching and is reflected in the testimonies below:
         </p>
         <br />
-        <Carousel autoPlay={false}>
+        <Carousel autoPlay={true}>
           <div>
             <h3>
               <b>Head teacher of Hopton Primary School</b>

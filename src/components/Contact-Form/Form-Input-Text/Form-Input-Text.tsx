@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-type FormInputTextProps = {
+export type FormInputTextProps = {
   name: string;
   yupName: string;
   label: string;

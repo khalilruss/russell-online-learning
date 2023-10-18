@@ -4,7 +4,7 @@ import { Control, Controller, FieldValues } from "react-hook-form";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-type FormCheckboxProps = {
+export type FormCheckboxProps = {
   name: string;
   control: Control<FieldValues, any>;
   capitalize: (str: string) => string;

@@ -30,7 +30,25 @@ test("renders header", async () => {
   expect(buttons.length).toBe(6);
   expect(buttons[0].textContent).toEqual("About");
   expect(buttons[0].getElementsByClassName("MuiButton-endIcon").length).toBe(1);
-  expect(buttons[1].textContent).toEqual("My Ethos");
+  expect(buttons[2].textContent).toEqual("My Accomplishments");
+  expect(buttons[3].textContent).toEqual("Testimonials");
+  expect(buttons[4].textContent).toEqual("Sessions and Prices");
+  expect(buttons[5].textContent).toEqual("Contact Me");
+});
+test("renders header", async () => {
+  const { findByTestId } = render(<Header />);
+
+  const header = await findByTestId("header");
+  expect(header).toBeInTheDocument();
+
+  const logo = await findByTestId("logo");
+  expect(logo).toBeInTheDocument();
+  expect(logo.textContent).toEqual("Russell Online Learning");
+
+  const buttons = header.getElementsByClassName("MuiButton-root");
+  expect(buttons.length).toBe(6);
+  expect(buttons[0].textContent).toEqual("About");
+  expect(buttons[0].getElementsByClassName("MuiButton-endIcon").length).toBe(1);
   expect(buttons[2].textContent).toEqual("My Accomplishments");
   expect(buttons[3].textContent).toEqual("Testimonials");
   expect(buttons[4].textContent).toEqual("Sessions and Prices");

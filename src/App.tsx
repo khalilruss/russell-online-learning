@@ -2,7 +2,7 @@ import "./App.css";
 import PageSection from "./components/Page-Section/Page-Section";
 import content from "./content/section-content";
 import Header from "./components/Header/Header";
-import ContactForm from "./components/Contact-Form/ContactForm";
+import ContactForm from "./components/Contact-Form/Contact-Form";
 import studyImg from "./assets/educacion_compensatoria_pequena.jpg";
 import childrenImg from "./assets/school-children.webp";
 import { motion } from "framer-motion";
@@ -14,9 +14,6 @@ const App = (): JSX.Element => {
   const headerRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const [paddingTop, setPaddingTop] = useState<number>(0);
-  const [paddingBottom, setPaddingBottom] = useState<number>(0);
-
   const displayContent = (): JSX.Element[] => {
     return content.slice(1).map((section, index) => {
       return (
@@ -26,7 +23,7 @@ const App = (): JSX.Element => {
           title={section.title}
           colouredBg={index % 2 === 0 ? false : true}
           contentClassName={
-            section.id === "ethos" ? (Desktop ? "w-3/4" : "") : ""
+            section.id === "aboutROL" ? (Desktop ? "w-3/4" : "") : ""
           }
         >
           {section.content}
@@ -34,32 +31,6 @@ const App = (): JSX.Element => {
       );
     });
   };
-
-  useEffect(() => {
-    const handleWindowResize = () => {
-      let windowHeight = window.innerHeight;
-      let headerHeight = headerRef.current!.clientHeight;
-      let titleHeight = titleRef.current!.clientHeight;
-      if (windowHeight > headerHeight + titleHeight) {
-        let newPBottom: number = Math.ceil(
-          (windowHeight - headerHeight - titleHeight) / 2
-        );
-        let newPTop = newPBottom + headerRef.current!.clientHeight;
-        setPaddingBottom(newPBottom);
-        setPaddingTop(newPTop);
-      }
-    };
-
-    if (paddingBottom === 0) {
-      handleWindowResize();
-    }
-
-    window.addEventListener("resize", handleWindowResize);
-
-    return () => {
-      window.removeEventListener("resize", handleWindowResize);
-    };
-  }, [paddingBottom]);
 
   return (
     <div className="App">
@@ -78,10 +49,8 @@ const App = (): JSX.Element => {
           id={content[0].id}
           style={{
             backgroundImage: `url(${childrenImg})`,
-            paddingBottom: paddingBottom,
-            paddingTop: paddingTop,
           }}
-          className="welcome-section background-image"
+          className="welcome-section background-image h-screen justify-center"
         >
           <div ref={titleRef}>
             <h1 className="welcome-title">{content[0].title}</h1>
@@ -95,7 +64,7 @@ const App = (): JSX.Element => {
         style={{
           backgroundImage: `url(${studyImg})`,
         }}
-        className="page-section p-8 background-image overflow-hidden"
+        className="page-section p-8 background-image overflow-hidden h-screen flex justify-center"
       >
         <motion.div
           initial="hidden"

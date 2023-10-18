@@ -6,7 +6,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Typography from "@mui/material/Typography";
-import FormInputText from "./Form-Input-Text/FormInputText";
+import FormInputText from "./Form-Input-Text/Form-Input-Text";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
@@ -15,8 +15,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useForm, FieldValues } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import FormCheckbox from "./Form-Checkbox/FormCheckbox";
-import FormSelect from "./Form-Select/FormSelect";
+import FormCheckbox from "./Form-Checkbox/Form-Checkbox";
+import FormSelect from "./Form-Select/Form-Select";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -116,7 +116,7 @@ const ContactForm = (): JSX.Element => {
   return (
     <Card
       elevation={8}
-      className={`bg-light-grey ${wrapSelects ? "" : "w-screen"}`}
+      className={`bg-light-grey self-center ${wrapSelects ? "" : "w-screen"}`}
     >
       <CardHeader
         className="w-full bg-regal-blue text-white"
@@ -151,11 +151,11 @@ const ContactForm = (): JSX.Element => {
                 let width =
                   name === "child age"
                     ? Desktop
-                      ? "10.3125rem"
-                      : "8.3125rem"
+                      ? ("10.3125rem" as `${number}rem`)
+                      : ("8.3125rem" as `${number}rem`)
                     : Desktop
-                    ? "10.3125rem"
-                    : "8.3125rem";
+                    ? ("10.3125rem" as `${number}rem`)
+                    : ("8.3125rem" as `${number}rem`);
                 let yupName = name.replace(" ", "_");
                 return (
                   <FormSelect

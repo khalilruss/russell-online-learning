@@ -142,7 +142,7 @@ const sectionContent: SectionContent[] = [
         </div>
         <>
           <br />
-          <p className="font-bold">The Russell Online Learning ethos is: </p>
+          <p className="font-bold">The Russell Online Learning ethos is:</p>
           <div className="pt-4 flex flex-row overflow-hidden">
             <motion.div
               initial="hidden"

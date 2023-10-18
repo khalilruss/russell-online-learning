@@ -15,11 +15,11 @@ import {
 import Typography from "@mui/material/Typography";
 import Select from "@mui/material/Select";
 
-type FormSelectProps = {
+export type FormSelectProps = {
   name: string;
   yupName: string;
   control: Control<FieldValues, any>;
-  width: string;
+  width: `${number}rem`;
   errors: FieldError | Merge<FieldError, FieldErrorsImpl<any>> | undefined;
   capitalize: (str: string) => string;
 };
@@ -50,7 +50,7 @@ const FormSelect = ({
   };
 
   return (
-    <>
+    <div className="flex flex-col">
       <FormControl
         className={`flex w-fit ${
           name === "child age" ? (wrapSelects ? "" : "pb-3") : ""
@@ -93,11 +93,10 @@ const FormSelect = ({
           )}
         />
       </FormControl>
-
       <Typography variant="inherit" color="textSecondary">
         {errors?.message?.toString()}
       </Typography>
-    </>
+    </div>
   );
 };
 

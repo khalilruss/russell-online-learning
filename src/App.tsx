@@ -7,7 +7,7 @@ import studyImg from "./assets/educacion_compensatoria_pequena.jpg";
 import childrenImg from "./assets/school-children.webp";
 import { motion } from "framer-motion";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 const App = (): JSX.Element => {
   const Desktop = useMediaQuery("(min-width:43.75rem)");
